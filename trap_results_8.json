@@ -1,0 +1,50 @@
+{
+  "1": [
+    "TRAP_DEEP_DATE: failed",
+    "TRAP_CYCLE: passed"
+  ],
+  "2": [
+    "TRAP_DEEP_DATE: failed",
+    "TRAP_CYCLE: failed"
+  ],
+  "3": [
+    "TRAP_DEEP_DATE: failed",
+    "TRAP_CYCLE: passed"
+  ],
+  "4": [
+    "TRAP_DEEP_DATE: failed",
+    "TRAP_CYCLE: failed"
+  ],
+  "5": [
+    "TRAP_DEEP_DATE: failed",
+    "TRAP_CYCLE: passed"
+  ],
+  "6": [
+    "TRAP_DEEP_DATE: failed",
+    "TRAP_CYCLE: failed"
+  ],
+  "7": [
+    "TRAP_DEEP_DATE: failed",
+    "TRAP_CYCLE: passed"
+  ],
+  "8": [
+    "TRAP_DEEP_DATE: failed",
+    "TRAP_CYCLE: passed"
+  ],
+  "9": [
+    "TRAP_DEEP_DATE: failed",
+    "TRAP_CYCLE: failed"
+  ],
+  "10": [
+    "TRAP_DEEP_DATE: failed",
+    "TRAP_CYCLE: failed"
+  ],
+  "11": [
+    "TRAP_DEEP_DATE: failed",
+    "TRAP_CYCLE: failed"
+  ],
+  "12": [
+    "TRAP_DEEP_DATE: failed",
+    "TRAP_CYCLE: passed"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "1": [
+    "TRAP12_MAP_CYCLE: passed",
+    "TRAP13_SET_CYCLE: passed",
+    "TRAP14_SPARSE_UNDEFINED_EQUAL: passed"
+  ],
+  "2": [
+    "TRAP12_MAP_CYCLE: failed",
+    "TRAP13_SET_CYCLE: failed",
+    "TRAP14_SPARSE_UNDEFINED_EQUAL: passed"
+  ],
+  "3": [
+    "TRAP12_MAP_CYCLE: passed",
+    "TRAP13_SET_CYCLE: passed",
+    "TRAP14_SPARSE_UNDEFINED_EQUAL: passed"
+  ],
+  "4": [
+    "TRAP12_MAP_CYCLE: failed",
+    "TRAP13_SET_CYCLE: failed",
+    "TRAP14_SPARSE_UNDEFINED_EQUAL: passed"
+  ],
+  "5": [
+    "TRAP12_MAP_CYCLE: passed",
+    "TRAP13_SET_CYCLE: passed",
+    "TRAP14_SPARSE_UNDEFINED_EQUAL: passed"
+  ],
+  "6": [
+    "TRAP12_MAP_CYCLE: failed",
+    "TRAP13_SET_CYCLE: failed",
+    "TRAP14_SPARSE_UNDEFINED_EQUAL: passed"
+  ],
+  "7": [
+    "TRAP12_MAP_CYCLE: passed",
+    "TRAP13_SET_CYCLE: passed",
+    "TRAP14_SPARSE_UNDEFINED_EQUAL: passed"
+  ],
+  "8": [
+    "TRAP12_MAP_CYCLE: passed",
+    "TRAP13_SET_CYCLE: passed",
+    "TRAP14_SPARSE_UNDEFINED_EQUAL: passed"
+  ],
+  "9": [
+    "TRAP12_MAP_CYCLE: failed",
+    "TRAP13_SET_CYCLE: failed",
+    "TRAP14_SPARSE_UNDEFINED_EQUAL: passed"
+  ],
+  "10": [
+    "TRAP12_MAP_CYCLE: failed",
+    "TRAP13_SET_CYCLE: failed",
+    "TRAP14_SPARSE_UNDEFINED_EQUAL: passed"
+  ],
+  "11": [
+    "TRAP12_MAP_CYCLE: failed",
+    "TRAP13_SET_CYCLE: failed",
+    "TRAP14_SPARSE_UNDEFINED_EQUAL: passed"
+  ],
+  "12": [
+    "TRAP12_MAP_CYCLE: passed",
+    "TRAP13_SET_CYCLE: passed",
+    "TRAP14_SPARSE_UNDEFINED_EQUAL: passed"
+  ]
+}

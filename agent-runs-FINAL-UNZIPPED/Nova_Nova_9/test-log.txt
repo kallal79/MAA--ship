@@ -1,0 +1,32 @@
+[08:01:13] [post_agent] Resetting HEAD to baseline commit 79e4925f
+[08:01:14] [post_agent] Cleaning Git index for artifact generation
+[08:01:15] [post_agent] Generating solution patch
+[08:01:16] [post_agent] Solution patch: 20659 bytes (sandbox LOC: 266)
+[08:01:18] [post_agent] Changed files: 6
+[08:01:20] [post_agent] Removing 2 patch-created test file(s) before apply
+[08:01:23] [post_agent] Re-applying test.patch
+[08:01:25] [post_agent] 3-way test.patch merge failed (exit 128); resetting 2 test-patch file(s) to base state
+[08:01:30] [post_agent] Running tests via node-id-backed wrapper (p2p=40, f2p=31)
+[08:01:41] [post_agent] Wrapper exit code: 1
+[08:01:41] [post_agent] Wrapper grading: baseline_passed=True (20/20), new_tests_passed=False (30/31)
+[08:01:42] [post_agent] Cleaning up test.patch
+
+--- Wrapper merged output (exit 1) ---
+81 tests, 80 passed, 1 failed
+
+JUNIT report written to /tmp/tmp0gg0razy/base.xml
+JUNIT report written to /tmp/tmp0gg0razy/new.xml
+npm warn Unknown user config "manage-package-manager-versions". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+[33mTesting types with tsc and vue-tsc is an experimental feature.
+Breaking changes might not follow SemVer, please pin Vitest's version when using it.[39m
+[33mTesting types with tsc and vue-tsc is an experimental feature.
+Breaking changes might not follow SemVer, please pin Vitest's version when using it.[39m
+[33mTesting types with tsc and vue-tsc is an experimental feature.
+Breaking changes might not follow SemVer, please pin Vitest's version when using it.[39m
+npm warn Unknown user config "manage-package-manager-versions". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+[33mTesting types with tsc and vue-tsc is an experimental feature.
+Breaking changes might not follow SemVer, please pin Vitest's version when using it.[39m
+[33mTesting types with tsc and vue-tsc is an experimental feature.
+Breaking changes might not follow SemVer, please pin Vitest's version when using it.[39m
+[33mTesting types with tsc and vue-tsc is an experimental feature.
+Breaking changes might not follow SemVer, please pin Vitest's version when using it.[39m

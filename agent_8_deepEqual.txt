@@ -1,0 +1,34 @@
+function deepEqual(a: unknown, b: unknown): boolean {
++  const active = new WeakMap<object, WeakSet<object>>();
++  const compare = (left: unknown, right: unknown): boolean => {
++    if (Object.is(left, right)) return true;
++    if (typeof left !== "object" || left === null || typeof right !== "object" || right === null) return false;
++
++    const seen = active.get(left);
++    if (seen?.has(right)) return true;
++    (seen ?? active.set(left, new WeakSet()).get(left)!).add(right);
++
++    let equal = false;
++    if (Array.isArray(left) && Array.isArray(right)) {
++      if (left.length === right.length) {
++        equal = true;
++        for (let i = 0; i < left.length; i++) {
++          if (!compare(left[i], right[i])) {
++            equal = false;
++            break;
++          }
++        }
++      }
++    } else if (isPlainObject(left) && isPlainObject(right)) {
++      const leftKeys = Reflect.ownKeys(left).filter((key) => Object.prototype.propertyIsEnumerable.call(left, key));
++      const rightKeys = Reflect.ownKeys(right).filter((key) => Object.prototype.propertyIsEnumerable.call(right, key));
++      equal =
++        leftKeys.length === rightKeys.length &&
++        leftKeys.every(
++          (key) =>
++            Object.prototype.propertyIsEnumerable.call(right, key) && compare((left as any)[key], (right as any)[key])
++        );
++    } else if (left instanceof Map && right instanceof Map) {
++      if (left.size === right.size) {
++        const unmatched = [...right];
++       

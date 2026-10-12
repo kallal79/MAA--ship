@@ -1,0 +1,62 @@
+{
+  "4": {
+    "record_default_string_key_omitted": "PASS",
+    "tuple_multiple_middle_compacts": "PASS",
+    "factory_strict_mode_error": "PASS",
+    "nested_wrapper_transparency": "PASS",
+    "set_bipartite_duplicate_rejection": "PASS",
+    "map_nested_set_deep_equality": "PASS",
+    "non_enumerable_ignored_on_default": "PASS",
+    "non_enumerable_ignored_on_input": "PASS",
+    "root_level_encode_default": "PASS",
+    "strict_mode_nan": "PASS"
+  },
+  "5": {
+    "record_default_string_key_omitted": "PASS",
+    "tuple_multiple_middle_compacts": "PASS",
+    "factory_strict_mode_error": "PASS",
+    "nested_wrapper_transparency": "PASS",
+    "set_bipartite_duplicate_rejection": "PASS",
+    "map_nested_set_deep_equality": "PASS",
+    "non_enumerable_ignored_on_default": "PASS",
+    "non_enumerable_ignored_on_input": "PASS",
+    "root_level_encode_default": "PASS",
+    "strict_mode_nan": "PASS"
+  },
+  "9": {
+    "record_default_string_key_omitted": "PASS",
+    "tuple_multiple_middle_compacts": "PASS",
+    "factory_strict_mode_error": "PASS",
+    "nested_wrapper_transparency": "PASS",
+    "set_bipartite_duplicate_rejection": "PASS",
+    "map_nested_set_deep_equality": "PASS",
+    "non_enumerable_ignored_on_default": "PASS",
+    "non_enumerable_ignored_on_input": "PASS",
+    "root_level_encode_default": "PASS",
+    "strict_mode_nan": "PASS"
+  },
+  "12": {
+    "record_default_string_key_omitted": "PASS",
+    "tuple_multiple_middle_compacts": "PASS",
+    "factory_strict_mode_error": "PASS",
+    "nested_wrapper_transparency": "PASS",
+    "set_bipartite_duplicate_rejection": "PASS",
+    "map_nested_set_deep_equality": "PASS",
+    "non_enumerable_ignored_on_default": "PASS",
+    "non_enumerable_ignored_on_input": "PASS",
+    "root_level_encode_default": "PASS",
+    "strict_mode_nan": "PASS"
+  },
+  "solution": {
+    "record_default_string_key_omitted": "PASS",
+    "tuple_multiple_middle_compacts": "PASS",
+    "factory_strict_mode_error": "PASS",
+    "nested_wrapper_transparency": "PASS",
+    "set_bipartite_duplicate_rejection": "PASS",
+    "map_nested_set_deep_equality": "PASS",
+    "non_enumerable_ignored_on_default": "PASS",
+    "non_enumerable_ignored_on_input": "PASS",
+    "root_level_encode_default": "PASS",
+    "strict_mode_nan": "PASS"
+  }
+}

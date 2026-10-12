@@ -1,0 +1,118 @@
+[16:42:50] [post_agent] Resetting HEAD to baseline commit 77f5e4dc
+[16:42:50] [post_agent] Cleaning Git index for artifact generation
+[16:42:51] [post_agent] Generating solution patch
+[16:42:52] [post_agent] Solution patch: 26984 bytes (sandbox LOC: 321)
+[16:42:52] [post_agent] Changed files: 6
+[16:42:53] [post_agent] Removing 2 patch-created test file(s) before apply
+[16:42:54] [post_agent] Re-applying test.patch
+[16:42:56] [post_agent] 3-way test.patch merge failed (exit 128); resetting 2 test-patch file(s) to base state
+[16:42:57] [post_agent] Running tests via node-id-backed wrapper (p2p=40, f2p=45)
+[16:43:07] [post_agent] Wrapper exit code: 1
+[16:43:07] [post_agent] Wrapper grading: baseline_passed=True (20/20), new_tests_passed=False (44/45)
+[16:43:08] [post_agent] Cleaning up test.patch
+
+--- Wrapper merged output (exit 1) ---
+97 tests, 96 passed, 1 failed
+
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.5 [39m[90m/app[39m
+
+ [32m✓[39m [30m[43m zod [49m[39m src/v4/classic/tests/default.test.ts [2m([22m[2m26 tests[22m[2m)[22m[32m 36[2mms[22m[39m
+ [32m✓[39m [30m[43m zod [49m[39m [44m[1m TS [22m[49m src/v4/classic/tests/default.test.ts [2m([22m[2m26 tests[22m[2m)[22m
+
+[2m Test Files [22m [1m[32m2 passed[39m[22m[90m (2)[39m
+[2m      Tests [22m [1m[32m52 passed[39m[22m[90m (52)[39m
+[2mType Errors [22m [2mno errors[22m
+[2m   Start at [22m 16:43:01
+[2m   Duration [22m 2.72s[2m (transform 643ms, setup 33ms, import 727ms, tests 36ms, environment 0ms, typecheck 1.75s)[22m
+
+JUNIT report written to /tmp/tmpixqqcdas/base.xml
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.5 [39m[90m/app[39m
+
+ [31m❯[39m [30m[43m zod [49m[39m src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts [2m([22m[2m45 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 43[2mms[22m[39m
+   [32m✓[39m encode skips default values in objects[32m 4[2mms[22m[39m
+   [32m✓[39m encode skips default values in records[32m 1[2mms[22m[39m
+   [32m✓[39m encode skips default values in maps[32m 1[2mms[22m[39m
+   [32m✓[39m encode skips default values in arrays[32m 1[2mms[22m[39m
+   [32m✓[39m encode skips default values in tuples[32m 1[2mms[22m[39m
+   [32m✓[39m encode skips multiple default values in tuples[32m 0[2mms[22m[39m
+[31m   [31m×[31m encode skips default values with deep equality[39m[32m 8[2mms[22m[39m
+   [32m✓[39m sparse hole equivalence[32m 1[2mms[22m[39m
+   [32m✓[39m implicit default option behaves identically to skipEncoding: true[32m 0[2mms[22m[39m
+   [32m✓[39m async support[32m 2[2mms[22m[39m
+   [32m✓[39m strict equality mode[32m 1[2mms[22m[39m
+   [32m✓[39m shallow equality mode[32m 1[2mms[22m[39m
+   [32m✓[39m deep equality behaves identically to skipEncoding: true[32m 1[2mms[22m[39m
+   [32m✓[39m Map deep equality is order-insensitive and deeply compares keys and values[32m 1[2mms[22m[39m
+   [32m✓[39m Set deep equality is order-insensitive and deeply compares elements[32m 1[2mms[22m[39m
+   [32m✓[39m sync predicate[32m 0[2mms[22m[39m
+   [32m✓[39m container-level defaults[32m 0[2mms[22m[39m
+   [32m✓[39m wrapper interaction[32m 1[2mms[22m[39m
+   [32m✓[39m encodeAsync + factory + predicate[32m 0[2mms[22m[39m
+   [32m✓[39m skipEncoding: false explicitly does not skip[32m 0[2mms[22m[39m
+   [32m✓[39m tuple removes middle element and shifts left[32m 0[2mms[22m[39m
+   [32m✓[39m tuple removes rest elements if omitted[32m 0[2mms[22m[39m
+   [32m✓[39m predicate receives undefined for factory defaults[32m 0[2mms[22m[39m
+   [32m✓[39m comparison against final encoded output not explicitly distinguished[32m 0[2mms[22m[39m
+   [32m✓[39m encode correctly processes un-omitted array elements following omitted ones (LLM trap)[32m 0[2mms[22m[39m
+   [32m✓[39m encoded default comparison requires encoding the default first[32m 0[2mms[22m[39m
+   [32m✓[39m cascading omission from elements to parent container[32m 0[2mms[22m[39m
+   [32m✓[39m deep equality ignores object key order[32m 0[2mms[22m[39m
+   [32m✓[39m transparent pass-through via the .catch() wrapper[32m 0[2mms[22m[39m
+   [32m✓[39m throws when sync predicate returns a promise during sync encode[32m 0[2mms[22m[39m
+   [32m✓[39m deep equality mode for Maps with identical object keys[32m 0[2mms[22m[39m
+   [32m✓[39m deep equality mode for Sets with identical object elements[32m 0[2mms[22m[39m
+   [32m✓[39m deep map key equality[32m 1[2mms[22m[39m
+   [32m✓[39m transparent wrappers pass through omission[32m 1[2mms[22m[39m
+   [32m✓[39m intersection handling of defaulted schema with skipEncoding[32m 1[2mms[22m[39m
+   [32m✓[39m deep equality handles sparse arrays (LLM trap)[32m 0[2mms[22m[39m
+   [32m✓[39m deep equality correctly matches NaN in Sets (LLM trap)[32m 0[2mms[22m[39m
+   [32m✓[39m implicit default option behaves as deep[32m 0[2mms[22m[39m
+   [32m✓[39m factory defaults reject boolean and mode options[32m 1[2mms[22m[39m
+   [32m✓[39m root-level encode primitives[32m 0[2mms[22m[39m
+   [32m✓[39m sparse arrays explicitly map holes to undefined during deep equality[32m 0[2mms[22m[39m
+   [32m✓[39m deeply nested async predicates resolve correctly (LLM trap)[32m 1[2mms[22m[39m
+   [32m✓[39m omission works through z.lazy() (LLM trap)[32m 0[2mms[22m[39m
+   [32m✓[39m passthrough objects preserve unknown keys while omitting defaults (LLM trap)[32m 1[2mms[22m[39m
+   [32m✓[39m unions pass through omission (LLM trap)[32m 5[2mms[22m[39m
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m44 passed[39m[22m[90m (45)[39m
+[2mType Errors [22m [2mno errors[22m
+[2m   Start at [22m 16:43:06
+[2m   Duration [22m 933ms[2m (transform 608ms, setup 32ms, import 687ms, tests 43ms, environment 0ms)[22m
+
+JUNIT report written to /tmp/tmpixqqcdas/new.xml
+[33mTesting types with tsc and vue-tsc is an experimental feature.
+Breaking changes might not follow SemVer, please pin Vitest's version when using it.[39m
+[33mTesting types with tsc and vue-tsc is an experimental feature.
+Breaking changes might not follow SemVer, please pin Vitest's version when using it.[39m
+[33mTesting types with tsc and vue-tsc is an experimental feature.
+Breaking changes might not follow SemVer, please pin Vitest's version when using it.[39m
+[33mTesting types with tsc and vue-tsc is an experimental feature.
+Breaking changes might not follow SemVer, please pin Vitest's version when using it.[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m [30m[43m zod [49m[39m src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts[2m > [22mencode skips default values with deep equality
+[31m[1mAssertionError[22m: expected { date: 1970-01-01T00:00:01.000Z } to deeply equal {}[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- {}[39m
+[31m+ {[39m
+[31m+   "date": 1970-01-01T00:00:01.000Z,[39m
+[31m+ }[39m
+
+[36m [2m❯[22m src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts:[2m61:5[22m[39m
+    [90m 59|[39m       prim2[33m:[39m [33m-[39m[34m0[39m[33m,[39m
+    [90m 60|[39m     })
+    [90m 61|[39m   )[33m.[39m[34mtoEqual[39m({})[33m;[39m
+    [90m   |[39m     [31m^[39m
+    [90m 62|[39m })[33m;[39m
+    [90m 63|[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+

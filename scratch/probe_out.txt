@@ -1,0 +1,16 @@
+catch => {}
+union => {}
+union-keep => {"a":1}
+lazy => {}
+inter-leaf => {"a":0}
+inter-obj => {"y":1}
+factory-false => {"a":0}
+factory-none => {"a":0}
+plain-default-none => {"a":0}
+root => 0
+mini => {}
+mini-keep => {"a":2}
+codec => {}
+chained => {}
+factory-pred-calls => [{},0]
+rootAsync => 0

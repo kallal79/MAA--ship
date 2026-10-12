@@ -1,0 +1,51 @@
+[15:53:37] [post_agent] Resetting HEAD to baseline commit 3e55d1b6
+[15:53:37] [post_agent] Cleaning Git index for artifact generation
+[15:53:38] [post_agent] Generating solution patch
+[15:53:39] [post_agent] Solution patch: 29657 bytes (sandbox LOC: 418)
+[15:53:39] [post_agent] Changed files: 6
+[15:53:40] [post_agent] Removing 3 patch-created test file(s) before apply
+[15:53:42] [post_agent] Re-applying test.patch
+[15:53:43] [post_agent] Running tests via node-id-backed wrapper (p2p=40, f2p=43)
+[15:54:00] [post_agent] Wrapper exit code: 0
+[15:54:00] [post_agent] Wrapper grading: baseline_passed=True (20/20), new_tests_passed=True (43/43)
+[15:54:01] [post_agent] Cleaning up test.patch
+
+--- Wrapper merged output (exit 0) ---
+93 tests, 93 passed
+
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.5 [39m[90m/app[39m
+
+ [32m✓[39m [30m[43m zod [49m[39m src/v4/classic/tests/default.test.ts [2m([22m[2m25 tests[22m[2m)[22m[32m 36[2mms[22m[39m
+ [32m✓[39m [30m[43m zod [49m[39m [44m[1m TS [22m[49m src/v4/classic/tests/default.test.ts [2m([22m[2m25 tests[22m[2m)[22m
+
+[2m Test Files [22m [1m[32m2 passed[39m[22m[90m (2)[39m
+[2m      Tests [22m [1m[32m50 passed[39m[22m[90m (50)[39m
+[2mType Errors [22m [2mno errors[22m
+[2m   Start at [22m 15:53:47
+[2m   Duration [22m 10.22s[2m (transform 650ms, setup 34ms, import 741ms, tests 36ms, environment 0ms, typecheck 9.22s)[22m
+
+JUNIT report written to /tmp/tmp8rjy8r24/base.xml
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.5 [39m[90m/app[39m
+
+ [32m✓[39m [30m[43m zod [49m[39m src/v4/classic/tests/encode-defaults-skipEncoding-types.spec.ts [2m([22m[2m1 test[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m [30m[43m zod [49m[39m src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts [2m([22m[2m42 tests[22m[2m)[22m[32m 30[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m2 passed[39m[22m[90m (2)[39m
+[2m      Tests [22m [1m[32m43 passed[39m[22m[90m (43)[39m
+[2mType Errors [22m [2mno errors[22m
+[2m   Start at [22m 15:53:59
+[2m   Duration [22m 1.01s[2m (transform 1.31s, setup 68ms, import 1.52s, tests 37ms, environment 0ms)[22m
+
+JUNIT report written to /tmp/tmp8rjy8r24/new.xml
+[33mTesting types with tsc and vue-tsc is an experimental feature.
+Breaking changes might not follow SemVer, please pin Vitest's version when using it.[39m
+[33mTesting types with tsc and vue-tsc is an experimental feature.
+Breaking changes might not follow SemVer, please pin Vitest's version when using it.[39m
+[33mTesting types with tsc and vue-tsc is an experimental feature.
+Breaking changes might not follow SemVer, please pin Vitest's version when using it.[39m
+[33mTesting types with tsc and vue-tsc is an experimental feature.
+Breaking changes might not follow SemVer, please pin Vitest's version when using it.[39m
+[33mTesting types with tsc and vue-tsc is an experimental feature.
+Breaking changes might not follow SemVer, please pin Vitest's version when using it.[39m

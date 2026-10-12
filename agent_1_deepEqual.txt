@@ -1,0 +1,37 @@
+function deepEqual(a: unknown, b: unknown, seen = new Map<object, Set<object>>()): boolean {
++  if (Object.is(a, b)) return true;
++  if (typeof a !== "object" || a === null || typeof b !== "object" || b === null) return false;
++
++  const matches = seen.get(a);
++  if (matches?.has(b)) return true;
++  if (matches) matches.add(b);
++  else seen.set(a, new Set([b]));
++
++  if (Array.isArray(a) && Array.isArray(b)) {
++    if (a.length !== b.length) return false;
++    for (let index = 0; index < a.length; index++) {
++      if (!deepEqual(a[index], b[index], seen)) return false;
++    }
++    return true;
++  }
++  if (isPlainObject(a) && isPlainObject(b)) {
++    const aKeys = enumerableKeys(a);
++    const bKeys = enumerableKeys(b);
++    if (aKeys.length !== bKeys.length) return false;
++    return aKeys.every((key) => Object.prototype.propertyIsEnumerable.call(b, key) && deepEqual(a[key], b[key], seen));
++  }
++  if (a instanceof Map && b instanceof Map) {
++    if (a.size !== b.size) return false;
++    const unmatched = [...b];
++    for (const [aKey, aValue] of a) {
++      const index = unmatched.findIndex(([bKey, bValue]) => {
++        const candidateSeen = new Map([...seen].map(([key, values]) => [key, new Set(values)]));
++        return deepEqual(aKey, bKey, candidateSeen) && deepEqual(aValue, bValue, candidateSeen);
++      });
++      if (index === -1) return false;
++      unmatched.splice(index, 1);
++    }
++    return true;
++  }
++  if (a instanceof Set && b instanceof Set) {
++    if (a

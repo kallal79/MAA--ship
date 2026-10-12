@@ -1,0 +1,86 @@
+{
+  "1": {
+    "inner_transform_trimmed_matches_default": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map_and_set": "FAIL: expected { m: Map{ 'a' => 1 }, s: Set{ 1, 2 } } to deeply equal {}",
+    "record_key_schema_omission_custom": "FAIL: expected { undefined: 1, keepKey: 2 } to deeply equal { keepKey: 2 }",
+    "map_key_default_omission": "PASS"
+  },
+  "2": {
+    "inner_transform_trimmed_matches_default": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map_and_set": "FAIL: expected { m: Map{ 'a' => 1 }, s: Set{ 1, 2 } } to deeply equal {}",
+    "record_key_schema_omission_custom": "FAIL: expected { skipKey: 1, keepKey: 2 } to deeply equal { keepKey: 2 }",
+    "map_key_default_omission": "PASS"
+  },
+  "3": {
+    "inner_transform_trimmed_matches_default": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map_and_set": "PASS",
+    "record_key_schema_omission_custom": "FAIL: expected { skipKey: 1, keepKey: 2 } to deeply equal { keepKey: 2 }",
+    "map_key_default_omission": "PASS"
+  },
+  "4": {
+    "inner_transform_trimmed_matches_default": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map_and_set": "PASS",
+    "record_key_schema_omission_custom": "PASS",
+    "map_key_default_omission": "PASS"
+  },
+  "5": {
+    "inner_transform_trimmed_matches_default": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map_and_set": "PASS",
+    "record_key_schema_omission_custom": "PASS",
+    "map_key_default_omission": "PASS"
+  },
+  "6": {
+    "inner_transform_trimmed_matches_default": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map_and_set": "FAIL: expected { m: Map{ 'a' => 1 }, s: Set{ 1, 2 } } to deeply equal {}",
+    "record_key_schema_omission_custom": "PASS",
+    "map_key_default_omission": "PASS"
+  },
+  "7": {
+    "inner_transform_trimmed_matches_default": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map_and_set": "FAIL: expected { m: Map{ 'a' => 1 }, s: Set{ 1, 2 } } to deeply equal {}",
+    "record_key_schema_omission_custom": "PASS",
+    "map_key_default_omission": "PASS"
+  },
+  "8": {
+    "inner_transform_trimmed_matches_default": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map_and_set": "PASS",
+    "record_key_schema_omission_custom": "FAIL: expected { skipKey: 1, keepKey: 2 } to deeply equal { keepKey: 2 }",
+    "map_key_default_omission": "PASS"
+  },
+  "9": {
+    "inner_transform_trimmed_matches_default": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map_and_set": "PASS",
+    "record_key_schema_omission_custom": "PASS",
+    "map_key_default_omission": "PASS"
+  },
+  "10": {
+    "inner_transform_trimmed_matches_default": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map_and_set": "PASS",
+    "record_key_schema_omission_custom": "PASS",
+    "map_key_default_omission": "PASS"
+  },
+  "11": {
+    "inner_transform_trimmed_matches_default": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map_and_set": "PASS",
+    "record_key_schema_omission_custom": "FAIL: expected { skipKey: 1, keepKey: 2 } to deeply equal { keepKey: 2 }",
+    "map_key_default_omission": "PASS"
+  },
+  "12": {
+    "inner_transform_trimmed_matches_default": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map_and_set": "PASS",
+    "record_key_schema_omission_custom": "PASS",
+    "map_key_default_omission": "PASS"
+  },
+  "13": {
+    "inner_transform_trimmed_matches_default": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map_and_set": "PASS",
+    "record_key_schema_omission_custom": "FAIL: expected { skipKey: 1, keepKey: 2 } to deeply equal { keepKey: 2 }",
+    "map_key_default_omission": "PASS"
+  },
+  "solution": {
+    "inner_transform_trimmed_matches_default": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map_and_set": "PASS",
+    "record_key_schema_omission_custom": "PASS",
+    "map_key_default_omission": "PASS"
+  }
+}

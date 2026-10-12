@@ -1,0 +1,86 @@
+# Nova Evaluation Results Report
+
+**Total Nova Agents Tested**: 77
+**Passed Agents**: 0
+**Failed Agents**: 77
+**Pass Rate**: 0.00%
+
+| Agent | Status | Passed Tests |
+|---|---|---|
+| Nova_Nova_1 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_2 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_3 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_4 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_5 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_6 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_7 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_8 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_9 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_10 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_11 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_12 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_13 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_14 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_15 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_16 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_17 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_18 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_19 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_20 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_21 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_22 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_23 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_24 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_25 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_26 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_27 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_28 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_29 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_30 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_31 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_32 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_33 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_34 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_35 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_36 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_37 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_38 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_39 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_40 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_41 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_42 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_43 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_44 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_45 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_46 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_47 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_48 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_49 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_50 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_51 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_52 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_53 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_54 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_55 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_56 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_57 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_58 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_59 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_60 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_61 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_62 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_63 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_64 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_65 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_66 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_67 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_68 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_69 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_70 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_71 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_72 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_73 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_74 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_75 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_76 | FAIL (0/31 passed) | 0/31 |
+| Nova_Nova_77 | FAIL (0/31 passed) | 0/31 |

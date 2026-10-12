@@ -1,0 +1,67 @@
+{
+  "1": {
+    "predicate_receives_encoded_transformed_value": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map": "FAIL: expected { m: Map{ 'a' => 1 } } to deeply equal {}",
+    "strict_mode_set": "FAIL: expected { s: Set{ 1, 2 } } to deeply equal {}"
+  },
+  "2": {
+    "predicate_receives_encoded_transformed_value": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map": "FAIL: expected { m: Map{ 'a' => 1 } } to deeply equal {}",
+    "strict_mode_set": "FAIL: expected { s: Set{ 1, 2 } } to deeply equal {}"
+  },
+  "3": {
+    "predicate_receives_encoded_transformed_value": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map": "PASS",
+    "strict_mode_set": "PASS"
+  },
+  "4": {
+    "predicate_receives_encoded_transformed_value": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map": "PASS",
+    "strict_mode_set": "PASS"
+  },
+  "5": {
+    "predicate_receives_encoded_transformed_value": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map": "PASS",
+    "strict_mode_set": "PASS"
+  },
+  "6": {
+    "predicate_receives_encoded_transformed_value": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map": "FAIL: expected { m: Map{ 'a' => 1 } } to deeply equal {}",
+    "strict_mode_set": "FAIL: expected { s: Set{ 1, 2 } } to deeply equal {}"
+  },
+  "7": {
+    "predicate_receives_encoded_transformed_value": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map": "FAIL: expected { m: Map{ 'a' => 1 } } to deeply equal {}",
+    "strict_mode_set": "FAIL: expected { s: Set{ 1, 2 } } to deeply equal {}"
+  },
+  "9": {
+    "predicate_receives_encoded_transformed_value": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map": "PASS",
+    "strict_mode_set": "PASS"
+  },
+  "10": {
+    "predicate_receives_encoded_transformed_value": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map": "PASS",
+    "strict_mode_set": "PASS"
+  },
+  "11": {
+    "predicate_receives_encoded_transformed_value": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map": "PASS",
+    "strict_mode_set": "PASS"
+  },
+  "12": {
+    "predicate_receives_encoded_transformed_value": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map": "PASS",
+    "strict_mode_set": "PASS"
+  },
+  "13": {
+    "predicate_receives_encoded_transformed_value": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map": "PASS",
+    "strict_mode_set": "PASS"
+  },
+  "solution": {
+    "predicate_receives_encoded_transformed_value": "FAIL: Encountered unidirectional transform during encode: ZodTransform",
+    "strict_mode_map": "PASS",
+    "strict_mode_set": "PASS"
+  }
+}

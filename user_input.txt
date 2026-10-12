@@ -1,0 +1,830 @@
+0 valid runs
+
+
+Run Rollouts
+Next step
+
+Run one agent to verify your tests and problem setup work before committing to a full batch.
+
+Run Quick Check
+
+23 stale batches (113 runs)
+General Requirements
+
+Fair task
+
+No agent run flagged the task as unfair or broken
+
+Solvable
+
+At least 1 agent run must solve the problem
+
+No cheating
+
+Cheat rate must be below 20% (across all agents)
+
+No environment blockers
+
+No run should be blocked by environment or verifier issues
+
+Olympus
+
+Minimum runs
+
+At least 10 agent runs must complete
+
+0/10 agent
+Difficulty
+
+Pass rate must be ≤50%
+
+Long-horizon
+
+Median of successful agent runs: ≥2 files, ≥20 messages, ≥200 LOC  AND  Select all
+Download selected
+Download All (0)
+Agent
+Verdict
+Time
+Files
+LOC
+Msgs
+
+23 stale batches (113 runs)
+
+JAY MA
+0/1 solves
+
+Solver: Nova · Eval: Nova
+Missed Requirement
+24m 51s
+7
+325
+49
+
+Run Aug 3 10:26 PM
+0/10 solves
+
+Solver: Nova · Eval: Nova
+Missed Requirement
+20m 16s
+5
+359
+42
+Solver: Nova · Eval: Nova
+Missed Requirement
+18m 6s
+5
+308
+31
+Solver: Nova · Eval: Nova
+Missed Requirement
+22m 28s
+6
+312
+41
+Solver: Nova · Eval: Nova
+Missed Requirement
+22m 35s
+5
+321
+40
+Solver: Nova · Eval: Nova
+Missed Requirement
+18m 55s
+6
+338
+45
+Solver: Nova · Eval: Nova
+Missed Requirement
+24m 17s
+5
+322
+51
+Solver: Nova · Eval: Nova
+Undocumented Req
+Env
+25m 10s
+8
+384
+57
+Solver: Nova · Eval: Nova
+Undocumented Req
+Env
+20m 18s
+5
+299
+47
+Solver: Nova · Eval: Nova
+Missed Requirement
+19m 3s
+5
+365
+35
+Solver: Nova · Eval: Nova
+Missed Requirement
+24m 24s
+6
+319
+56
+
+Run Aug 3 9:59 PM
+0/1 solves
+
+Solver: Nova · Eval: Nova
+Undocumented Req
+Env
+19m 17s
+6
+321
+40
+
+JAY MA KALI
+4/10 solves
+
+Solver: Nova · Eval: Nova
+Missed Requirement
+15m 14s
+6
+303
+38
+Solver: Nova · Eval: Nova
+Missed Requirement
+15m 10s
+6
+250
+39
+Solver: Nova · Eval: Nova
+Solved
+16m 57s
+7
+278
+37
+Solver: Nova · Eval: Nova
+Missed Requirement
+16m 56s
+7
+240
+43
+Solver: Nova · Eval: Nova
+Missed Requirement
+14m 51s
+5
+259
+41
+Solver: Nova · Eval: Nova
+Solved
+17m 6s
+6
+300
+46
+Solver: Nova · Eval: Nova
+Missed Requirement
+15m 3s
+6
+266
+36
+Solver: Nova · Eval: Nova
+Solved
+10m 29s
+5
+266
+25
+Solver: Nova · Eval: Nova
+Solved
+15m 19s
+6
+256
+36
+Solver: Nova · Eval: Nova
+Missed Requirement
+11m 34s
+5
+269
+37
+
+Run Jul 17 6:32 PM
+0/1 solves
+
+Solver: Nova · Eval: Nova
+Missed Requirement
+14m 20s
+6
+318
+95
+
+Run Jul 16 8:49 PM
+1/1 solves
+
+Solver: Nova · Eval: Nova
+Solved
+37m 12s
+6
+278
+104
+
+JAY SRI RAM . JAY MA KALI , DADU
+10/10 solves
+
+Solver: Nova · Eval: Nova
+Solved
+14m 9s
+7
+352
+87
+Solver: Nova · Eval: Nova
+Solved
+16m 58s
+6
+373
+91
+Solver: Nova · Eval: Nova
+Solved
+18m 52s
+7
+381
+95
+Solver: Nova · Eval: Nova
+Solved
+24m 29s
+6
+335
+124
+Solver: Nova · Eval: Nova
+Solved
+23m 55s
+6
+308
+134
+Solver: Nova · Eval: Nova
+Solved
+19m 20s
+6
+336
+139
+Solver: Nova · Eval: Nova
+Solved
+21m 54s
+6
+346
+136
+Solver: Nova · Eval: Nova
+Solved
+18m 33s
+6
+324
+98
+Solver: Nova · Eval: Nova
+Solved
+22m 36s
+5
+369
+125
+Solver: Nova · Eval: Nova
+Solved
+20m 17s
+6
+327
+130
+
+Run Jul 15 1:57 PM
+1/1 solves
+
+Solver: Nova · Eval: Nova
+Solved
+16m 42s
+6
+348
+98
+
+Run Jul 3 1:10 AM
+1/1 solves
+
+Solver: Nova · Eval: Nova
+Solved
+8m 55s
+6
+301
+109
+
+MAA
+8/10 solves
+
+Solver: Nova · Eval: Nova
+Missed Requirement
+9m 22s
+6
+395
+95
+Solver: Nova · Eval: Nova
+Regression
+11m 41s
+7
+359
+122
+Solver: Nova · Eval: Nova
+Solved
+11m 1s
+7
+293
+126
+Solver: Nova · Eval: Nova
+Solved
+8m 40s
+6
+324
+96
+Solver: Nova · Eval: Nova
+Solved
+8m 56s
+6
+343
+132
+Solver: Nova · Eval: Nova
+Solved
+10m 12s
+8
+375
+118
+Solver: Nova · Eval: Nova
+Solved
+9m 48s
+6
+328
+128
+Solver: Nova · Eval: Nova
+Solved
+12m 41s
+6
+322
+115
+Solver: Nova · Eval: Nova
+Solved
+9m 3s
+6
+353
+110
+Solver: Nova · Eval: Nova
+Solved
+11m 46s
+6
+337
+93
+
+MAARAM
+1/1 solves
+
+Solver: Nova · Eval: Nova
+Solved
+9m 34s
+6
+312
+96
+
+JAY MA
+10/10 solves
+
+Solver: Nova · Eval: Nova
+Solved
+12m 32s
+6
+317
+117
+Solver: Nova · Eval: Nova
+Solved
+10m 11s
+6
+322
+122
+Solver: Nova · Eval: Nova
+Solved
+10m 42s
+6
+339
+119
+Solver: Nova · Eval: Nova
+Solved
+12m
+6
+392
+132
+Solver: Nova · Eval: Nova
+Solved
+11m 15s
+6
+357
+111
+Solver: Nova · Eval: Nova
+Solved
+12m 38s
+6
+353
+122
+Solver: Nova · Eval: Nova
+Solved
+9m 24s
+6
+348
+110
+Solver: Nova · Eval: Nova
+Solved
+9m 59s
+6
+337
+97
+Solver: Nova · Eval: Nova
+Solved
+10m 41s
+6
+316
+144
+Solver: Nova · Eval: Nova
+Solved
+15m 52s
+6
+352
+172
+
+JAY MA
+0/1 solves
+
+Solver: Nova · Eval: Nova
+Missed Requirement
+10m 37s
+6
+306
+88
+
+JAY MA KALI
+1/1 solves
+
+Solver: Nova · Eval: Nova
+Solved
+9m 48s
+6
+325
+106
+
+Run 1
+10/10 solves
+
+Solver: Nova · Eval: Nova
+Solved
+11m 26s
+6
+300
+89
+Solver: Nova · Eval: Nova
+Solved
+13m 6s
+6
+351
+143
+Solver: Nova · Eval: Nova
+Solved
+11m 53s
+6
+376
+123
+Solver: Nova · Eval: Nova
+Solved
+9m 11s
+6
+295
+100
+Solver: Nova · Eval: Nova
+Solved
+10m 39s
+7
+348
+120
+Solver: Nova · Eval: Nova
+Solved
+10m 7s
+5
+342
+101
+Solver: Nova · Eval: Nova
+Solved
+9m 32s
+6
+345
+118
+Solver: Nova · Eval: Nova
+Solved
+10m 55s
+7
+386
+117
+Solver: Nova · Eval: Nova
+Solved
+12m
+6
+304
+143
+Solver: Nova · Eval: Nova
+Solved
+12m 42s
+6
+339
+129
+
+Run 1
+1/1 solves
+
+Solver: Nova · Eval: Nova
+Solved
+10m 7s
+6
+332
+106
+
+Run Jun 17 8:48 PM
+1/1 solves
+
+Solver: Nova · Eval: Nova
+Solved
+15m 46s
+6
+288
+116
+
+Run Jun 16 4:05 AM
+4/10 solves
+
+Solver: Nova · Eval: Nova
+Solved
+11m 19s
+6
+471
+93
+Solver: Nova · Eval: Nova
+Missed Requirement
+9m 52s
+8
+353
+84
+Solver: Nova · Eval: Nova
+Solved
+9m 44s
+7
+439
+86
+Solver: Nova · Eval: Nova
+Missed Requirement
+7m 1s
+6
+342
+60
+Solver: Nova · Eval: Nova
+Solved
+9m 58s
+6
+413
+71
+Solver: Nova · Eval: Nova
+Solved
+10m 21s
+6
+425
+103
+Solver: Nova · Eval: Nova
+Missed Requirement
+8m 27s
+6
+404
+72
+Solver: Nova · Eval: Nova
+Missed Requirement
+11m 5s
+6
+394
+95
+Solver: Nova · Eval: Nova
+Missed Requirement
+11m 27s
+6
+424
+82
+Solver: Nova · Eval: Nova
+Missed Requirement
+9m 10s
+6
+436
+67
+
+Run Jun 16 3:53 AM
+0/1 solves
+
+Solver: Nova · Eval: Nova
+Missed Requirement
+11m 24s
+6
+407
+86
+
+Run
+2/10 solves
+
+Solver: Nova · Eval: Nova
+Missed Requirement
+14m 35s
+6
+396
+102
+Solver: Nova · Eval: Nova
+Missed Requirement
+9m 44s
+6
+387
+77
+Solver: Nova · Eval: Nova
+Solved
+9m 16s
+7
+363
+68
+Solver: Nova · Eval: Nova
+Missed Requirement
+10m 5s
+6
+377
+75
+Solver: Nova · Eval: Nova
+Missed Requirement
+8m 14s
+6
+366
+57
+Solver: Nova · Eval: Nova
+Missed Requirement
+13m 57s
+6
+366
+106
+Solver: Nova · Eval: Nova
+Missed Requirement
+13m 37s
+7
+398
+73
+Solver: Nova · Eval: Nova
+Solved
+29m 52s
+6
+371
+86
+Solver: Nova · Eval: Nova
+Missed Requirement
+9m 30s
+8
+384
+69
+Solver: Nova · Eval: Nova
+Missed Requirement
+11m 5s
+6
+394
+84
+
+Run Jun 6 10:18 AM
+6/10 solves
+
+Solver: Nova · Eval: Nova
+Solved
+6m 54s
+6
+324
+57
+Solver: Nova · Eval: Nova
+Solved
+11m 47s
+9
+275
+111
+Solver: Nova · Eval: Nova
+Solved
+8m 10s
+6
+263
+63
+Solver: Nova · Eval: Nova
+Missed Requirement
+9m 46s
+7
+331
+76
+Solver: Nova · Eval: Nova
+Solved
+11m 5s
+8
+304
+115
+Solver: Nova · Eval: Nova
+Missed Requirement
+9m 22s
+6
+308
+88
+Solver: Nova · Eval: Nova
+Solved
+7m 44s
+6
+281
+92
+Solver: Nova · Eval: Nova
+Missed Requirement
+10m 59s
+7
+283
+93
+Solver: Nova · Eval: Nova
+Solved
+6m 38s
+6
+252
+87
+Solver: Nova · Eval: Nova
+Missed Requirement
+8m 55s
+7
+260
+90
+
+Run Jun 6 10:10 AM
+0/1 solves
+
+Solver: Nova · Eval: Nova
+Missed Requirement
+7m 15s
+7
+266
+68
+
+Run Jun 5 7:56 AM
+10/10 solves
+
+Solver: Nova · Eval: Nova
+Solved
+6m 59s
+5
+162
+68
+Solver: Nova · Eval: Nova
+Solved
+7m 44s
+6
+159
+71
+Solver: Nova · Eval: Nova
+Solved
+8m 15s
+8
+161
+64
+Solver: Nova · Eval: Nova
+Solved
+12m 4s
+6
+149
+102
+Solver: Nova · Eval: Nova
+Solved
+12m 46s
+8
+200
+84
+Solver: Nova · Eval: Nova
+Solved
+8m 35s
+6
+170
+77
+Solver: Nova · Eval: Nova
+Solved
+10m 34s
+6
+177
+79
+Solver: Nova · Eval: Nova
+Solved
+8m 26s
+6
+217
+69
+Solver: Nova · Eval: Nova
+Solved
+7m 18s
+5
+199
+72
+Solver: Nova · Eval: Nova
+Solved
+20m 32s
+7
+172
+109
+Solver: Nova · Eval: Nova
+Missed Requirement
+Stale
+18m 6s · 5 files · 308 LOC · 31 msgs

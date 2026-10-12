@@ -1,0 +1,4 @@
+Run: Nova #6
+Run ID: rd74d8wh3xkvahpqwsjbtr1s9x8bnq4x
+URL: https://shipd.ai/quests/olympus/challenges/kh79nq31jvffcancpkfyg379js879jrz?run=rd74d8wh3xkvahpqwsjbtr1s9x8bnq4x
+Solver: Nova · Eval: Nova

@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuites tests="40" failures="0" errors="0" skipped="0"><testsuite name="baseline" tests="40" failures="0" errors="0" skipped="0"><testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="basic defaults" time="0.002479142">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="default with optional" time="0.000536733">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="default with transform" time="0.000881874">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="default on existing optional" time="0.000522622">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="optional on default" time="0.000275032">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="removeDefault" time="0.000211961">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="apply default at output" time="0.000702223">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="nested" time="0.001683839">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="chained defaults" time="0.000326281">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="object optionality" time="0.000461943">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="nested prefault/default" time="0.011046194">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="failing default" time="0.001346777">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="partial should not clobber defaults" time="0.000911974">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="defaulted object schema returns shallow clone" time="0.000415592">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="defaulted array schema returns shallow clone" time="0.000475073">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="defaulted Map schema returns shallow clone" time="0.000661843">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="defaulted Set schema returns shallow clone" time="0.000349592">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="mutations on defaulted Map do not affect subsequent parses" time="0.000251331">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="mutations on defaulted Set do not affect subsequent parses" time="0.000200211">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="direction-aware defaults" time="0.001730989">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="basic defaults" time="0">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="default with optional" time="0">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="default with transform" time="0">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="default on existing optional" time="0">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="optional on default" time="0">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="removeDefault" time="0">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="apply default at output" time="0">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="nested" time="0">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="chained defaults" time="0">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="object optionality" time="0">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="nested prefault/default" time="0">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="failing default" time="0">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="partial should not clobber defaults" time="0">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="defaulted object schema returns shallow clone" time="0">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="defaulted array schema returns shallow clone" time="0">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="defaulted Map schema returns shallow clone" time="0">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="defaulted Set schema returns shallow clone" time="0">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="mutations on defaulted Map do not affect subsequent parses" time="0">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="mutations on defaulted Set do not affect subsequent parses" time="0">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/default.test.ts" name="direction-aware defaults" time="0">
+        </testcase>
+        </testsuite></testsuites>

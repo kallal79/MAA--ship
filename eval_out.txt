@@ -1,0 +1,20 @@
+Starting parallel evaluation...
+Nova_Nova_1: FAIL (0/50)
+Nova_Nova_2: FAIL (0/50)
+Nova_Nova_3: FAIL (0/50)
+Nova_Nova_4: FAIL (0/50)
+Nova_Nova_5: FAIL (0/50)
+Nova_Nova_6: FAIL (0/50)
+Nova_Nova_7: FAIL (0/50)
+Nova_Nova_8: FAIL (0/50)
+Nova_Nova_9: FAIL (0/50)
+Nova_Nova_10: FAIL (0/50)
+Nova_Nova_11: FAIL (0/50)
+Nova_Nova_12: FAIL (0/50)
+\n=======================================
+Total Nova Agents Evaluated: 12
+Passed Agents: 0
+Failed Agents: 12
+Pass Rate: 0.00%
+=======================================\n
+Results saved to final_evaluation_report.md

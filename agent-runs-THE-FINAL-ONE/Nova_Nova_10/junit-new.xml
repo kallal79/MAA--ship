@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuites tests="45" failures="2" errors="0" skipped="0"><testsuite name="new" tests="45" failures="2" errors="0" skipped="0"><testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="encode skips default values in objects" time="0.004015405">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="encode skips default values in records" time="0.001214541">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="encode skips default values in maps" time="0.000715589">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="encode skips default values in arrays" time="0.000654718">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="encode skips default values in tuples" time="0.000845825">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="encode skips multiple default values in tuples" time="0.000391381">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="encode skips default values with deep equality" time="0.007857059">
+            <failure message="expected { date: 1970-01-01T00:00:01.000Z } to deeply equal {}" type="AssertionError">
+AssertionError: expected { date: 1970-01-01T00:00:01.000Z } to deeply equal {}
+
+- Expected
++ Received
+
+- {}
++ {
++   "date": 1970-01-01T00:00:01.000Z,
++ }
+
+ ❯ src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts:61:5
+            </failure>
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="sparse hole equivalence" time="0.000775329">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="implicit default option behaves identically to skipEncoding: true" time="0.000440995">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="async support" time="0.001693354">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="strict equality mode" time="0.000677342">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="shallow equality mode" time="0.000756922">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="deep equality behaves identically to skipEncoding: true" time="0.000942841">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="Map deep equality is order-insensitive and deeply compares keys and values" time="0.000610481">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="Set deep equality is order-insensitive and deeply compares elements" time="0.00082858">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="sync predicate" time="0.000319191">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="container-level defaults" time="0.000469918">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="wrapper interaction" time="0.000788769">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="encodeAsync + factory + predicate" time="0.000331911">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="skipEncoding: false explicitly does not skip" time="0.000335456">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="tuple removes middle element and shifts left" time="0.00035134">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="tuple removes rest elements if omitted" time="0.000541557">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="predicate receives undefined for factory defaults" time="0.000264329">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="comparison against final encoded output not explicitly distinguished" time="0.000218209">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="encode correctly processes un-omitted array elements following omitted ones (LLM trap)" time="0.000172009">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="encoded default comparison requires encoding the default first" time="0.000506554">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="cascading omission from elements to parent container" time="0.000349578">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="deep equality ignores object key order" time="0.000249987">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="transparent pass-through via the.catch() wrapper" time="0.000493895">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="throws when sync predicate returns a promise during sync encode" time="0.000364319">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="deep equality mode for Maps with identical object keys" time="0.000367414">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="deep equality mode for Sets with identical object elements" time="0.000287093">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="deep map key equality" time="0.000644502">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="transparent wrappers pass through omission" time="0.000661818">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="intersection handling of defaulted schema with skipEncoding" time="0.000858074">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="deep equality handles sparse arrays (LLM trap)" time="0.000401195">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="deep equality correctly matches NaN in Sets (LLM trap)" time="0.000606665">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="implicit default option behaves as deep" time="0.00140564">
+            <failure message="expected { a: +0 } to deeply equal {}" type="AssertionError">
+AssertionError: expected { a: +0 } to deeply equal {}
+
+- Expected
++ Received
+
+- {}
++ {
++   "a": 0,
++ }
+
+ ❯ src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts:339:35
+            </failure>
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="factory defaults reject boolean and mode options" time="0.000944654">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="root-level encode primitives" time="0.000290008">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="sparse arrays explicitly map holes to undefined during deep equality" time="0.000291811">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="deeply nested async predicates resolve correctly (LLM trap)" time="0.000717692">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="omission works through z.lazy() (LLM trap)" time="0.000586585">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="passthrough objects preserve unknown keys while omitting defaults (LLM trap)" time="0.000442637">
+        </testcase>
+        <testcase classname="packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts" name="unions pass through omission (LLM trap)" time="0.001024876">
+        </testcase>
+    </testsuite></testsuites>

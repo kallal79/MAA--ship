@@ -1,0 +1,41 @@
+function deepEqual(a: unknown, b: unknown): boolean {
++  if (Object.is(a, b)) return true;
++  if (typeof a !== "object" || a === null || typeof b !== "object" || b === null) return false;
++
++  if (Array.isArray(a) && Array.isArray(b)) {
++    if (a.length !== b.length) return false;
++    for (let i = 0; i < a.length; i++) if (!deepEqual(a[i], b[i])) return false;
++    return true;
++  }
++  if (util.isPlainObject(a) && util.isPlainObject(b)) {
++    const keys = Reflect.ownKeys(a);
++    if (keys.length !== Reflect.ownKeys(b).length) return false;
++    return keys.every((key) => Object.prototype.hasOwnProperty.call(b, key) && deepEqual(a[key], b[key]));
++  }
++  if (a instanceof Map && b instanceof Map) {
++    if (a.size !== b.size) return false;
++    const remaining = [...b];
++    for (const [key, value] of a) {
++      const index = remaining.findIndex(
++        ([otherKey, otherValue]) => deepEqual(key, otherKey) && deepEqual(value, otherValue)
++      );
++      if (index === -1) return false;
++      remaining.splice(index, 1);
++    }
++    return true;
++  }
++  if (a instanceof Set && b instanceof Set) {
++    if (a.size !== b.size) return false;
++    const remaining = [...b];
++    for (const value of a) {
++      const index = remaining.findIndex((other) => deepEqual(value, other));
++      if (index === -1) return false;
++      remaining.splice(index, 1);
++    }
++    return true;
++  }
++  return false;
++}
++
+ function handleDefaultResult(payload: ParsePayload, def: $ZodDefaultDef) {
+ 

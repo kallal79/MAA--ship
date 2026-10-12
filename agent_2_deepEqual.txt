@@ -1,0 +1,44 @@
+function deepEqual(a: unknown, b: unknown): boolean {
++  if (Object.is(a, b)) return true;
++  if (Array.isArray(a) && Array.isArray(b)) {
++    if (a.length !== b.length) return false;
++    for (let i = 0; i < a.length; i++) {
++      if (!deepEqual(a[i], b[i])) return false;
++    }
++    return true;
++  }
++  if (util.isPlainObject(a) && util.isPlainObject(b)) {
++    const aKeys = enumerableKeys(a);
++    const bKeys = enumerableKeys(b);
++    return (
++      aKeys.length === bKeys.length &&
++      aKeys.every((key) => Object.prototype.hasOwnProperty.call(b, key) && deepEqual(a[key], b[key]))
++    );
++  }
++  if (a instanceof Map && b instanceof Map) {
++    if (a.size !== b.size) return false;
++    const unmatched = [...b];
++    for (const [key, value] of a) {
++      const index = unmatched.findIndex(
++        ([otherKey, otherValue]) => deepEqual(key, otherKey) && deepEqual(value, otherValue)
++      );
++      if (index === -1) return false;
++      unmatched.splice(index, 1);
++    }
++    return true;
++  }
++  if (a instanceof Set && b instanceof Set) {
++    if (a.size !== b.size) return false;
++    const unmatched = [...b];
++    for (const value of a) {
++      const index = unmatched.findIndex((other) => deepEqual(value, other));
++      if (index === -1) return false;
++      unmatched.splice(index, 1);
++    }
++    return true;
++  }
++  return false;
++}
++
++function enumerableKeys(value: object): PropertyKey[] {
++  return Reflect.ownKeys(value).filter((key) => Object.prototype.property

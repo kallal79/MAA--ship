@@ -1,0 +1,31 @@
+[13:14:49] [post_agent] Resetting HEAD to baseline commit 23e1722f
+[13:14:49] [post_agent] Cleaning Git index for artifact generation
+[13:14:49] [post_agent] Generating solution patch
+[13:14:50] [post_agent] Solution patch: 23627 bytes (sandbox LOC: 318)
+[13:14:51] [post_agent] Changed files: 6
+[13:14:51] [post_agent] Resetting 2 test-patch file(s) to base state
+[13:14:52] [post_agent] Re-applying test.patch
+[13:14:54] [post_agent] Running tests via node-id-backed wrapper (p2p=40, f2p=31)
+[13:15:04] [post_agent] Wrapper exit code: 1
+[13:15:04] [post_agent] Wrapper grading: baseline_passed=True (20/20), new_tests_passed=False (30/31)
+[13:15:05] [post_agent] Cleaning up test.patch
+
+--- Wrapper merged output (exit 1) ---
+81 tests, 80 passed, 1 failed
+
+JUNIT report written to /tmp/tmpmf5a2ojo/base.xml
+JUNIT report written to /tmp/tmpmf5a2ojo/new.xml
+npm warn Unknown user config "manage-package-manager-versions". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+[33mTesting types with tsc and vue-tsc is an experimental feature.
+Breaking changes might not follow SemVer, please pin Vitest's version when using it.[39m
+[33mTesting types with tsc and vue-tsc is an experimental feature.
+Breaking changes might not follow SemVer, please pin Vitest's version when using it.[39m
+[33mTesting types with tsc and vue-tsc is an experimental feature.
+Breaking changes might not follow SemVer, please pin Vitest's version when using it.[39m
+npm warn Unknown user config "manage-package-manager-versions". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+[33mTesting types with tsc and vue-tsc is an experimental feature.
+Breaking changes might not follow SemVer, please pin Vitest's version when using it.[39m
+[33mTesting types with tsc and vue-tsc is an experimental feature.
+Breaking changes might not follow SemVer, please pin Vitest's version when using it.[39m
+[33mTesting types with tsc and vue-tsc is an experimental feature.
+Breaking changes might not follow SemVer, please pin Vitest's version when using it.[39m

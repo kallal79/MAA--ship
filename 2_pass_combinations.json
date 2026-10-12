@@ -1,0 +1,62 @@
+[
+  {
+    "tests": [
+      "predicate_raw_default"
+    ],
+    "passingNova": "Nova #1, Nova #2"
+  },
+  {
+    "tests": [
+      "predicate_raw_default",
+      "non_enumerable_on_default_object"
+    ],
+    "passingNova": "Nova #1, Nova #2"
+  },
+  {
+    "tests": [
+      "predicate_raw_default",
+      "async_predicate_sync_throws"
+    ],
+    "passingNova": "Nova #1, Nova #2"
+  },
+  {
+    "tests": [
+      "predicate_raw_default",
+      "non_enumerable_on_default_object",
+      "async_predicate_sync_throws"
+    ],
+    "passingNova": "Nova #1, Nova #2"
+  },
+  {
+    "tests": [
+      "predicate_raw_default",
+      "tuple_multiple_middle_compacts"
+    ],
+    "passingNova": "Nova #1, Nova #2"
+  },
+  {
+    "tests": [
+      "predicate_raw_default",
+      "non_enumerable_on_default_object",
+      "tuple_multiple_middle_compacts"
+    ],
+    "passingNova": "Nova #1, Nova #2"
+  },
+  {
+    "tests": [
+      "predicate_raw_default",
+      "async_predicate_sync_throws",
+      "tuple_multiple_middle_compacts"
+    ],
+    "passingNova": "Nova #1, Nova #2"
+  },
+  {
+    "tests": [
+      "predicate_raw_default",
+      "non_enumerable_on_default_object",
+      "async_predicate_sync_throws",
+      "tuple_multiple_middle_compacts"
+    ],
+    "passingNova": "Nova #1, Nova #2"
+  }
+]
