@@ -1,0 +1,35 @@
+﻿diff --git a/packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts b/packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts
+index 5c7d343c..550b7198 100644
+--- a/packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts
++++ b/packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts
+@@ -23,8 +23,8 @@ test("encode skips default values in maps", () => {
+   expect(schema.encode(map)).toEqual(new Map([["b", 1]]));
+ });
+ 
+-test("encode skips default values in arrays", () => {
+-  const schema = z.array(z.number().default(0, { skipEncoding: true }));
++test("encode skips default values in rest elements", () => {
++  const schema = z.tuple([]).rest(z.number().default(0, { skipEncoding: true }));
+   expect(schema.encode([1, 0, 2])).toEqual([1, 2]);
+ });
+ 
+@@ -327,8 +327,8 @@ test("comparison against final encoded output not explicitly distinguished", ()
+   expect(schema.encode({ x: 1 })).toEqual({ x: 1 });
+ });
+ 
+-test("encode correctly processes un-omitted array elements following omitted ones (LLM trap)", () => {
+-  const schema = z.array(z.number().default(0, { skipEncoding: true }));
++test("encode correctly processes un-omitted rest elements following omitted ones (LLM trap)", () => {
++  const schema = z.tuple([]).rest(z.number().default(0, { skipEncoding: true }));
+   expect(schema.encode([1, 0, 2, 0, 3])).toEqual([1, 2, 3]);
+ });
+ 
+@@ -347,7 +347,7 @@ test("encoded default comparison requires encoding the default first", () => {
+ });
+ 
+ test("cascading omission from elements to parent container", () => {
+-  const schema = z.array(z.number().default(0, { skipEncoding: true })).default([], { skipEncoding: true });
++  const schema = z.tuple([]).rest(z.number().default(0, { skipEncoding: true })).default([], { skipEncoding: true });
+   expect(z.object({ a: schema }).encode({ a: [0, 0] })).toEqual({});
+   expect(z.object({ a: schema }).encode({ a: [0] })).toEqual({});
+   expect(z.object({ a: schema }).encode({ a: [1] })).toEqual({ a: [1] });
