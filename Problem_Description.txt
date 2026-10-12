@@ -1,0 +1,21 @@
+Add a `skipEncoding` option to `.default()` so default-valued outputs can be omitted during encode.
+
+When `skipEncoding` triggers inside a container, the default value is omitted from the encoded output:
+- Objects and Records: the matching property key and value are omitted.
+- Maps: if either key or value schema triggers `skipEncoding`, the entry is omitted.
+- Arrays and Sets: matching elements are removed.
+- Tuples: matching elements are removed, compacting the tuple output array.
+
+For literal defaults, `skipEncoding` compares the value after inner encoding against the default value. In nested chains, each defaulted schema independently evaluates its own rule.
+
+Equality modes:
+The `skipEncoding` option accepts a boolean (`true`/`false`), an object `{ mode: "strict" | "shallow" | "deep" }`, or a predicate function. Setting `skipEncoding: true` behaves as `{ mode: "deep" }`.
+- Deep equality (`{ mode: "deep" }`): compares primitives (`Object.is`), Date (by timestamp), Array (recursive), plain objects (key-order-insensitive recursive), Map (order-insensitive matching keys/values), and Set (order-insensitive 1-to-1 bipartite matching).
+- Shallow equality (`{ mode: "shallow" }`): only compares top-level members by identity with `Object.is()`.
+- Strict equality (`{ mode: "strict" }`): compares values with `Object.is()`.
+
+Predicates and factory defaults:
+- Predicates receive `(encodedValue, rawDefaultValue)` returning a boolean or `Promise<boolean>`.
+- Calling `.encode()` synchronously with an async predicate throws: `"Cannot use async skipEncoding in synchronous encode"`.
+- Factory defaults only support predicates. Passing a boolean or mode object throws: `"Cannot use skipEncoding: true with a factory default"` (or JSON-stringified mode object).
+- Wrapper schemas (`.optional()`, `.nullable()`, `.nullish()`) are transparent to omission. Supported across classic and mini APIs.

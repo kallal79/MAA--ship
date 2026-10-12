@@ -1,0 +1,10 @@
+Add a `skipEncoding` option to `.default()` so default-valued outputs can be omitted during encode.
+
+When encoding objects, records, maps, arrays, or tuples, omit members whose encoded value matches the schema's default (compacting arrays and tuples). For literal defaults, `skipEncoding` compares both actual and default values after inner encoding. Nested defaults should still omit independently at each level.
+
+The `skipEncoding` option accepts a boolean, an object `{ mode: "strict" | "shallow" | "deep" }`, or a predicate function. If `skipEncoding` is omitted, it defaults to `{ mode: "deep" }`.
+- Deep equality (`{ mode: "deep" }`): compares primitives with `Object.is()`, Date (by timestamp), Array (recursive, treating sparse holes as undefined), plain objects (recursive, ignoring key order), Map (order-insensitive matching keys and values), and Set (order-insensitive element matching).
+- Shallow equality (`{ mode: "shallow" }`): compares elements in Array and Set by identity with `Object.is()`; for Map, compares matching keys and values by identity with `Object.is()`; for plain objects, compares property values by identity with `Object.is()`.
+- Strict equality (`{ mode: "strict" }`): compares values with `Object.is()`.
+
+Predicates receive `(encodedValue, rawDefaultValue)` (where `rawDefaultValue` is undefined for factory defaults) and return a boolean or `Promise<boolean>`. Calling `.encode()` synchronously with an async predicate throws: `"Cannot use async skipEncoding in synchronous encode"`. Factory defaults only support predicate-based `skipEncoding`; non-predicate forms throw an error mentioning `skipEncoding` and `factory default`. Omission works transparently through wrappers like optional, nullable, and catch, as well as union, intersection, and lazy paths.

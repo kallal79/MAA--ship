@@ -1,0 +1,255 @@
+diff --git a/packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts b/packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts
+new file mode 100644
+index 00000000..d9f4371b
+--- /dev/null
++++ b/packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts
+@@ -0,0 +1,212 @@
++import { expect, test } from "vitest";
++import { z } from "../../../index.js";
++
++// 1. encode skips default values in objects
++test("encode skips default values in objects", () => {
++  const schema = z.object({
++    a: z.number().default(0, { skipEncoding: true }),
++    b: z.string().default("hello", { skipEncoding: true }),
++  });
++  expect(schema.encode({ a: 0, b: "hello" })).toEqual({});
++  expect(schema.encode({ a: 1, b: "hello" })).toEqual({ a: 1 });
++  expect(schema.encode({ a: 0, b: "world" })).toEqual({ b: "world" });
++  expect(schema.encode({ a: 1, b: "world" })).toEqual({ a: 1, b: "world" });
++});
++
++// 2. encode skips default values in maps
++test("encode skips default values in maps", () => {
++  const schema = z.map(z.string(), z.number().default(0, { skipEncoding: true }));
++  const m1 = new Map([["a", 0], ["b", 1]]);
++  const result = schema.encode(m1);
++  expect(result).toEqual(new Map([["b", 1]]));
++});
++
++// 3. encode skips default values in arrays
++test("encode skips default values in arrays", () => {
++  const schema = z.array(z.number().default(0, { skipEncoding: true }));
++  expect(schema.encode([0, 1, 0, 2])).toEqual([1, 2]);
++});
++
++// 4. encode skips default values in tuples
++test("encode skips default values in tuples", () => {
++  const schema = z.tuple([
++    z.number().default(0, { skipEncoding: true }),
++    z.string(),
++  ]);
++  expect(schema.encode([0, "a"])).toEqual(["a"]);
++  expect(schema.encode([1, "a"])).toEqual([1, "a"]);
++});
++
++// 5. encode skips multiple default values in tuples
++test("encode skips multiple default values in tuples", () => {
++  const schema = z.tuple([
++    z.number().default(0, { skipEncoding: true }),
++    z.string().default("x", { skipEncoding: true }),
++    z.boolean().default(false, { skipEncoding: true }),
++  ]);
++  expect(schema.encode([0, "x", false])).toEqual([]);
++  expect(schema.encode([1, "x", false])).toEqual([1]);
++  expect(schema.encode([0, "y", false])).toEqual(["y"]);
++});
++
++// 6. encode skips default values in sets
++test("encode skips default values in sets", () => {
++  const schema = z.set(z.number().default(0, { skipEncoding: true }));
++  const s = new Set([0, 1, 2]);
++  const result = schema.encode(s);
++  expect(result).toEqual(new Set([1, 2]));
++});
++
++// 7. predicate receives rawDefaultValue parameter
++test("predicate receives rawDefaultValue parameter", () => {
++  let passedRaw: any = null;
++  const schema = z.object({
++    a: z.string().default("fallback", {
++      skipEncoding: (val: any, raw?: any) => {
++        passedRaw = raw;
++        return val === "fallback";
++      },
++    }),
++  });
++  expect(schema.encode({ a: "fallback" })).toEqual({});
++  expect(passedRaw).toBe("fallback");
++});
++
++// 8. async support with async predicate
++test("async support", async () => {
++  const schema = z.object({
++    a: z.number().default(0, { skipEncoding: async (v: any) => v === 0 }),
++  });
++  expect(await schema.encodeAsync({ a: 0 })).toEqual({});
++  expect(await schema.encodeAsync({ a: 1 })).toEqual({ a: 1 });
++});
++
++// 9. sync encode with async predicate throws error
++test("sync encode with async predicate throws error", () => {
++  const schema = z.object({
++    a: z.number().default(0, { skipEncoding: async (v: any) => v === 0 }),
++  });
++  expect(() => schema.encode({ a: 0 })).toThrowError(/Cannot use async skipEncoding in synchronous encode/);
++});
++
++// 10. nested defaults
++test("nested defaults", () => {
++  const inner = z.object({ x: z.number() }).default({ x: 0 }, { skipEncoding: true });
++  const outer = z.object({ inner }).default({ inner: { x: 0 } }, { skipEncoding: true });
++  const schema = z.object({ outer });
++  expect(schema.encode({ outer: { inner: { x: 0 } } })).toEqual({});
++  expect(schema.encode({ outer: { inner: { x: 1 } } })).toEqual({ outer: { inner: { x: 1 } } });
++});
++
++// 11. mini API exhaustive
++test("mini API exhaustive", () => {
++  const s1 = z.object({ n: z.number().default(0, { skipEncoding: true }) });
++  expect(s1.encode({ n: 0 })).toEqual({});
++  expect(s1.encode({ n: 1 })).toEqual({ n: 1 });
++
++  const s2 = z.string().default("x", { skipEncoding: true });
++  const obj2 = z.object({ v: s2 });
++  expect(obj2.encode({ v: "x" })).toEqual({});
++  expect(obj2.encode({ v: "y" })).toEqual({ v: "y" });
++
++  const s3 = z.boolean().default(false, { skipEncoding: true });
++  const obj3 = z.object({ flag: s3 });
++  expect(obj3.encode({ flag: false })).toEqual({});
++  expect(obj3.encode({ flag: true })).toEqual({ flag: true });
++});
++
++// 12. factory defaults with predicate
++test("factory defaults", () => {
++  const schema = z.object({
++    arr: z.array(z.number()).default(() => [], { skipEncoding: (v: any) => v.length === 0 }),
++  });
++  expect(schema.encode({ arr: [] })).toEqual({});
++  expect(schema.encode({ arr: [1] })).toEqual({ arr: [1] });
++});
++
++// 13. strict equality mode
++test("strict equality mode", () => {
++  const schema = z.object({
++    n: z.number().default(0, { skipEncoding: { mode: "strict" } }),
++  });
++  expect(schema.encode({ n: 0 })).toEqual({});
++  expect(schema.encode({ n: -0 })).toEqual({ n: -0 });
++  expect(schema.encode({ n: 1 })).toEqual({ n: 1 });
++});
++
++// 14. shallow equality mode
++test("shallow equality mode", () => {
++  const obj = { x: 1 };
++  const schema = z.object({
++    o: z.object({ x: z.number() }).default(obj, { skipEncoding: { mode: "shallow" } }),
++  });
++  expect(schema.encode({ o: obj })).toEqual({});
++  expect(schema.encode({ o: { x: 1 } })).toEqual({});
++  expect(schema.encode({ o: { x: 2 } })).toEqual({ o: { x: 2 } });
++});
++
++// 15. wrapper transparency
++test("wrapper transparency", () => {
++  const schema = z.object({
++    opt: z.number().default(0, { skipEncoding: true }).optional(),
++    nul: z.number().default(0, { skipEncoding: true }).nullable(),
++  });
++  expect(schema.encode({ opt: 0, nul: 0 })).toEqual({});
++  expect(schema.encode({ opt: 1, nul: 2 })).toEqual({ opt: 1, nul: 2 });
++});
++
++// 16. nullish wrapper transparency
++test("nullish wrapper transparency", () => {
++  const schema = z.object({
++    a: z.string().default("def", { skipEncoding: true }).nullish(),
++  });
++  expect(schema.encode({ a: "def" })).toEqual({});
++  expect(schema.encode({ a: "custom" })).toEqual({ a: "custom" });
++  expect(schema.encode({ a: null })).toEqual({ a: null });
++});
++
++// 17. skipEncoding: false does not skip
++test("skipEncoding: false does not skip", () => {
++  const schema = z.object({
++    a: z.number().default(0, { skipEncoding: false }),
++  });
++  expect(schema.encode({ a: 0 })).toEqual({ a: 0 });
++});
++
++// 18. tuple middle element removal
++test("tuple middle element removal", () => {
++  const schema = z.tuple([
++    z.string(),
++    z.number().default(0, { skipEncoding: true }),
++    z.boolean(),
++  ]);
++  expect(schema.encode(["a", 0, true])).toEqual(["a", true]);
++  expect(schema.encode(["a", 1, true])).toEqual(["a", 1, true]);
++});
++
++// 19. deep equality ignores non-enumerable properties
++test("deep equality ignores non-enumerable properties", () => {
++  const defaultObj: any = { a: 1 };
++  Object.defineProperty(defaultObj, "secret", {
++    value: "hidden",
++    enumerable: false,
++    configurable: true,
++  });
++
++  const schema = z.object({
++    obj: z.object({ a: z.number() }).default(defaultObj, { skipEncoding: true }),
++  });
++
++  expect(schema.encode({ obj: { a: 1 } })).toEqual({});
++});
++
++// 20. tuple multiple middle elements compacts correctly
++test("tuple multiple middle elements compacts correctly", () => {
++  const schema = z.tuple([
++    z.number(),
++    z.string().default("a", { skipEncoding: true }),
++    z.string().default("b", { skipEncoding: true }),
++    z.boolean(),
++  ]);
++  expect(schema.encode([10, "a", "b", true])).toEqual([10, true]);
++});
+diff --git a/test.sh b/test.sh
+new file mode 100755
+index 00000000..482d7037
+--- /dev/null
++++ b/test.sh
+@@ -0,0 +1,31 @@
++#!/bin/bash
++
++OUTPUT_PATH=""
++MODE=""
++
++while [[ $# -gt 0 ]]; do
++  case "$1" in
++    --output_path)
++      OUTPUT_PATH="$2"
++      shift 2
++      ;;
++    base|new)
++      MODE="$1"
++      shift
++      ;;
++    *)
++      shift
++      ;;
++  esac
++done
++
++REPORTER_ARGS="--typecheck.enabled=false"
++if [ -n "$OUTPUT_PATH" ]; then
++  REPORTER_ARGS="--typecheck.enabled=false --reporter=default --reporter=junit --outputFile=$OUTPUT_PATH"
++fi
++
++if [ "$MODE" = "base" ]; then
++  npx vitest run packages/zod/src/v4/classic/tests/default.test.ts $REPORTER_ARGS
++else
++  npx vitest run packages/zod/src/v4/classic/tests/encode-defaults.8a4f9b.spec.ts $REPORTER_ARGS
++fi
