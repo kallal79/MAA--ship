@@ -1,0 +1,662 @@
+diff --git a/packages/zod/src/v4/classic/schemas.ts b/packages/zod/src/v4/classic/schemas.ts
+index e46abf5..556d307 100644
+--- a/packages/zod/src/v4/classic/schemas.ts
++++ b/packages/zod/src/v4/classic/schemas.ts
+@@ -164,8 +164,8 @@ export interface ZodType<
+   nonoptional(params?: string | core.$ZodNonOptionalParams): ZodNonOptional<this>;
+   nullable(): ZodNullable<this>;
+   nullish(): ZodOptional<ZodNullable<this>>;
+-  default(def: util.NoUndefined<core.output<this>>): ZodDefault<this>;
+-  default(def: () => util.NoUndefined<core.output<this>>): ZodDefault<this>;
++  default(def: util.NoUndefined<core.output<this>>, params?: core.$ZodDefaultParams): ZodDefault<this>;
++  default(def: () => util.NoUndefined<core.output<this>>, params?: core.$ZodDefaultParams): ZodDefault<this>;
+   prefault(def: () => core.input<this>): ZodPrefault<this>;
+   prefault(def: core.input<this>): ZodPrefault<this>;
+   array(): ZodArray<this>;
+@@ -316,8 +316,8 @@ export const ZodType: core.$constructor<ZodType> = /*@__PURE__*/ core.$construct
+     transform(tx) {
+       return pipe(this, transform(tx));
+     },
+-    default(d) {
+-      return _default(this, d);
++    default(d, params) {
++      return _default(this, d, params);
+     },
+     prefault(d) {
+       return prefault(this, d);
+@@ -2154,13 +2154,21 @@ export const ZodDefault: core.$constructor<ZodDefault> = /*@__PURE__*/ core.$con
+ 
+ export function _default<T extends core.SomeType>(
+   innerType: T,
+-  defaultValue: util.NoUndefined<core.output<T>> | (() => util.NoUndefined<core.output<T>>)
++  defaultValue: util.NoUndefined<core.output<T>> | (() => util.NoUndefined<core.output<T>>),
++  params?: core.$ZodDefaultParams
+ ): ZodDefault<T> {
++  const isFactory = typeof defaultValue === "function";
++  if (isFactory && params?.skipEncoding !== undefined && typeof params.skipEncoding !== "function") {
++    throw new Error(`Cannot use skipEncoding: ${JSON.stringify(params.skipEncoding)} with a factory default`);
++  }
+   return new ZodDefault({
+     type: "default",
+     innerType: innerType as any as core.$ZodType,
++    ...params,
++    defaultValueFactory: isFactory,
++    rawDefaultValue: isFactory ? undefined : defaultValue,
+     get defaultValue() {
+-      return typeof defaultValue === "function" ? (defaultValue as Function)() : util.shallowClone(defaultValue);
++      return isFactory ? (defaultValue as Function)() : util.shallowClone(defaultValue);
+     },
+   }) as any;
+ }
+diff --git a/packages/zod/src/v4/classic/tests/default.test.ts b/packages/zod/src/v4/classic/tests/default.test.ts
+index d7ff8b4..fefdfdd 100644
+--- a/packages/zod/src/v4/classic/tests/default.test.ts
++++ b/packages/zod/src/v4/classic/tests/default.test.ts
+@@ -407,3 +407,105 @@ test("direction-aware defaults", () => {
+     }
+   `);
+ });
++
++test("skipEncoding encodes static defaults before deep comparison", () => {
++  const stringNumber = z.codec(z.string(), z.number(), {
++    decode: (value) => Number(value),
++    encode: (value) => String(value),
++  });
++  const schema = z.object({ value: stringNumber.default(12, { skipEncoding: true }) });
++
++  expect(z.encode(schema, { value: 12 })).toEqual({});
++  expect(z.encode(schema, { value: 13 })).toEqual({ value: "13" });
++});
++
++test("skipEncoding comparison modes", () => {
++  const deep = z.object({ value: z.unknown().default({ a: [1, { b: 2 }] }, { skipEncoding: true }) });
++  expect(z.encode(deep, { value: { a: [1, { b: 2 }] } })).toEqual({});
++
++  const shallowDefault = { nested: {} };
++  const shallow = z.object({
++    value: z.unknown().default(shallowDefault, { skipEncoding: { mode: "shallow" } }),
++  });
++  expect(z.encode(shallow, { value: { nested: {} } })).toEqual({ value: { nested: {} } });
++
++  const strict = z.object({ value: z.unknown().default(1, { skipEncoding: { mode: "strict" } }) });
++  expect(z.encode(strict, { value: 1 })).toEqual({});
++  expect(z.encode(strict, { value: 2 })).toEqual({ value: 2 });
++});
++
++test("deep skipEncoding supports sparse arrays, objects, maps, and sets", () => {
++  const sparse = Array(1);
++  const defaults = {
++    sparse,
++    object: { a: 1, b: 2 },
++    map: new Map<any, any>([[{ key: 1 }, { value: 2 }]]),
++    set: new Set<any>([{ value: 1 }, { value: 2 }]),
++  };
++  const schema = z.object({ value: z.unknown().default(defaults, { skipEncoding: true }) });
++  const value = {
++    sparse: [undefined],
++    object: { b: 2, a: 1 },
++    map: new Map<any, any>([[{ key: 1 }, { value: 2 }]]),
++    set: new Set<any>([{ value: 2 }, { value: 1 }]),
++  };
++  expect(z.encode(schema, { value })).toEqual({});
++});
++
++test("skipEncoding omission propagates through structural schemas", () => {
++  const omitted = z.string().default("x", { skipEncoding: true });
++
++  expect(z.encode(z.array(omitted), ["x", "y", "x"])).toEqual(["y"]);
++  expect(z.encode(z.tuple([z.string(), omitted, z.string()]), ["a", "x", "c"])).toEqual(["a", "c"]);
++  expect(z.encode(z.record(z.string(), omitted), { a: "x", b: "y" })).toEqual({ b: "y" });
++  expect(
++    z.encode(
++      z.map(z.string(), omitted),
++      new Map([
++        ["a", "x"],
++        ["b", "y"],
++      ])
++    )
++  ).toEqual(new Map([["b", "y"]]));
++});
++
++test("skipEncoding is transparent through wrappers and applies at the root", () => {
++  const omitted = z.string().default("x", { skipEncoding: true });
++  expect(z.encode(omitted, "x")).toBeUndefined();
++  expect(
++    z.encode(
++      z.lazy(() => omitted),
++      "x"
++    )
++  ).toBeUndefined();
++  expect(z.encode(z.union([omitted, z.number()]), "x")).toBeUndefined();
++  expect(z.encode(z.object({ value: omitted }).passthrough(), { value: "x", extra: true })).toEqual({ extra: true });
++});
++
++test("skipEncoding predicates and factory defaults", async () => {
++  const predicate = (encodedValue: unknown, rawDefaultValue: unknown) => encodedValue === rawDefaultValue;
++  expect(z.encode(z.string().default("x", { skipEncoding: predicate }), "x")).toBeUndefined();
++
++  let rawDefault: unknown = "not called";
++  const factory = z.string().default(() => "x", {
++    skipEncoding: (_encodedValue, raw) => {
++      rawDefault = raw;
++      return true;
++    },
++  });
++  expect(z.encode(factory, "anything")).toBeUndefined();
++  expect(rawDefault).toBeUndefined();
++
++  expect(() => z.string().default(() => "x", { skipEncoding: true })).toThrow(
++    "Cannot use skipEncoding: true with a factory default"
++  );
++  expect(() => z.string().default(() => "x", { skipEncoding: { mode: "deep" } })).toThrow(
++    'Cannot use skipEncoding: {"mode":"deep"} with a factory default'
++  );
++
++  const asyncOmit = z.string().default("x", { skipEncoding: async () => true });
++  expect(() => z.encode(z.object({ value: asyncOmit }), { value: "x" })).toThrow(
++    "Cannot use async skipEncoding in synchronous encode"
++  );
++  expect(await z.encodeAsync(z.object({ value: asyncOmit }), { value: "x" })).toEqual({});
++});
+diff --git a/packages/zod/src/v4/core/api.ts b/packages/zod/src/v4/core/api.ts
+index c1d2d7e..22bd377 100644
+--- a/packages/zod/src/v4/core/api.ts
++++ b/packages/zod/src/v4/core/api.ts
+@@ -1464,18 +1464,29 @@ export function _nullable<T extends schemas.$ZodObject>(
+ }
+ 
+ // ZodDefault
+-export type $ZodDefaultParams = TypeParams<schemas.$ZodDefault, "innerType" | "defaultValue">;
++export type $ZodDefaultParams = TypeParams<
++  schemas.$ZodDefault,
++  "innerType" | "defaultValue" | "defaultValueFactory" | "rawDefaultValue"
++>;
+ // @__NO_SIDE_EFFECTS__
+ export function _default<T extends schemas.$ZodObject>(
+   Class: util.SchemaClass<schemas.$ZodDefault>,
+   innerType: T,
+-  defaultValue: util.NoUndefined<core.output<T>> | (() => util.NoUndefined<core.output<T>>)
++  defaultValue: util.NoUndefined<core.output<T>> | (() => util.NoUndefined<core.output<T>>),
++  params?: $ZodDefaultParams
+ ): schemas.$ZodDefault<T> {
++  const isFactory = typeof defaultValue === "function";
++  if (isFactory && params?.skipEncoding !== undefined && typeof params.skipEncoding !== "function") {
++    throw new Error(`Cannot use skipEncoding: ${JSON.stringify(params.skipEncoding)} with a factory default`);
++  }
+   return new Class({
+     type: "default",
+     innerType,
++    ...params,
++    defaultValueFactory: isFactory,
++    rawDefaultValue: isFactory ? undefined : defaultValue,
+     get defaultValue() {
+-      return typeof defaultValue === "function" ? (defaultValue as Function)() : util.shallowClone(defaultValue);
++      return isFactory ? (defaultValue as Function)() : util.shallowClone(defaultValue);
+     },
+   }) as any;
+ }
+diff --git a/packages/zod/src/v4/core/parse.ts b/packages/zod/src/v4/core/parse.ts
+index aaf2929..aa76864 100644
+--- a/packages/zod/src/v4/core/parse.ts
++++ b/packages/zod/src/v4/core/parse.ts
+@@ -24,7 +24,7 @@ export const _parse: (_Err: $ZodErrorClass) => $Parse = (_Err) => (schema, value
+     util.captureStackTrace(e, _params?.callee);
+     throw e;
+   }
+-  return result.value as core.output<typeof schema>;
++  return (result.omitted ? undefined : result.value) as core.output<typeof schema>;
+ };
+ 
+ export const parse: $Parse = /* @__PURE__*/ _parse(errors.$ZodRealError);
+@@ -45,7 +45,7 @@ export const _parseAsync: (_Err: $ZodErrorClass) => $ParseAsync = (_Err) => asyn
+     util.captureStackTrace(e, params?.callee);
+     throw e;
+   }
+-  return result.value as core.output<typeof schema>;
++  return (result.omitted ? undefined : result.value) as core.output<typeof schema>;
+ };
+ 
+ export const parseAsync: $ParseAsync = /* @__PURE__*/ _parseAsync(errors.$ZodRealError);
+@@ -68,7 +68,7 @@ export const _safeParse: (_Err: $ZodErrorClass) => $SafeParse = (_Err) => (schem
+         success: false,
+         error: new (_Err ?? errors.$ZodError)(result.issues.map((iss) => util.finalizeIssue(iss, ctx, core.config()))),
+       }
+-    : ({ success: true, data: result.value } as any);
++    : ({ success: true, data: result.omitted ? undefined : result.value } as any);
+ };
+ export const safeParse: $SafeParse = /* @__PURE__*/ _safeParse(errors.$ZodRealError);
+ 
+@@ -88,7 +88,7 @@ export const _safeParseAsync: (_Err: $ZodErrorClass) => $SafeParseAsync = (_Err)
+         success: false,
+         error: new _Err(result.issues.map((iss) => util.finalizeIssue(iss, ctx, core.config()))),
+       }
+-    : ({ success: true, data: result.value } as any);
++    : ({ success: true, data: result.omitted ? undefined : result.value } as any);
+ };
+ 
+ export const safeParseAsync: $SafeParseAsync = /* @__PURE__*/ _safeParseAsync(errors.$ZodRealError);
+diff --git a/packages/zod/src/v4/core/schemas.ts b/packages/zod/src/v4/core/schemas.ts
+index 4f85fbf..17da021 100644
+--- a/packages/zod/src/v4/core/schemas.ts
++++ b/packages/zod/src/v4/core/schemas.ts
+@@ -41,6 +41,8 @@ export interface ParsePayload<T = unknown> {
+    * undefined. Set by $ZodCatch when catchValue substitutes and by every
+    * $ZodTransform invocation. */
+   fallback?: boolean | undefined;
++  /** @internal Marks an encoded value for omission by its structural parent. */
++  omitted?: boolean | undefined;
+ }
+ 
+ export type CheckFn<T> = (input: ParsePayload<T>) => util.MaybeAsync<void>;
+@@ -1631,7 +1633,7 @@ function handleArrayResult(result: ParsePayload<any>, final: ParsePayload<any[]>
+   if (result.issues.length) {
+     final.issues.push(...util.prefixIssues(index, result.issues));
+   }
+-  final.value[index] = result.value;
++  if (!result.omitted) final.value.push(result.value);
+ }
+ 
+ export const $ZodArray: core.$constructor<$ZodArray> = /*@__PURE__*/ core.$constructor("$ZodArray", (inst, def) => {
+@@ -1651,8 +1653,9 @@ export const $ZodArray: core.$constructor<$ZodArray> = /*@__PURE__*/ core.$const
+       return payload;
+     }
+ 
+-    payload.value = Array(input.length);
++    payload.value = [];
+     const proms: Promise<any>[] = [];
++    const results: ParsePayload[] = new Array(input.length);
+     for (let i = 0; i < input.length; i++) {
+       const item = input[i];
+       const result = def.element._zod.run(
+@@ -1664,17 +1667,24 @@ export const $ZodArray: core.$constructor<$ZodArray> = /*@__PURE__*/ core.$const
+       );
+ 
+       if (result instanceof Promise) {
+-        proms.push(result.then((result) => handleArrayResult(result, payload, i)));
++        proms.push(
++          result.then((result) => {
++            results[i] = result;
++          })
++        );
+       } else {
+-        handleArrayResult(result, payload, i);
++        results[i] = result;
+       }
+     }
+ 
+     if (proms.length) {
+-      return Promise.all(proms).then(() => payload);
++      return Promise.all(proms).then(() => {
++        for (let i = 0; i < results.length; i++) handleArrayResult(results[i]!, payload, i);
++        return payload;
++      });
+     }
+-
+-    return payload; //handleArrayResultsAsync(parseResults, final);
++    for (let i = 0; i < results.length; i++) handleArrayResult(results[i]!, payload, i);
++    return payload;
+   };
+ });
+ 
+@@ -1763,6 +1773,7 @@ function handlePropertyResult(
+     }
+     final.issues.push(...util.prefixIssues(key, result.issues));
+   }
++  if (result.omitted) return;
+ 
+   if (!isPresent && !isOptionalIn) {
+     if (!result.issues.length) {
+@@ -2114,7 +2125,7 @@ export const $ZodObjectJIT: core.$constructor<$ZodObject> = /*@__PURE__*/ core.$
+         return payload;
+       }
+ 
+-      if (jit && fastEnabled && ctx?.async === false && ctx.jitless !== true) {
++      if (jit && fastEnabled && ctx?.async === false && ctx.jitless !== true && ctx.direction !== "backward") {
+         // always synchronous
+         if (!fastpass) fastpass = generateFastpass(def.shape);
+         payload = fastpass(payload, ctx);
+@@ -2167,8 +2178,7 @@ export interface $ZodUnion<T extends readonly SomeType[] = readonly $ZodType[]>
+ function handleUnionResults(results: ParsePayload[], final: ParsePayload, inst: $ZodUnion, ctx?: ParseContext) {
+   for (const result of results) {
+     if (result.issues.length === 0) {
+-      final.value = result.value;
+-      return final;
++      return result;
+     }
+   }
+ 
+@@ -2257,8 +2267,7 @@ function handleExclusiveUnionResults(
+   const successes = results.filter((r) => r.issues.length === 0);
+ 
+   if (successes.length === 1) {
+-    final.value = successes[0].value;
+-    return final;
++    return successes[0]!;
+   }
+ 
+   if (successes.length === 0) {
+@@ -2593,6 +2602,7 @@ function handleIntersectionResults(result: ParsePayload, left: ParsePayload, rig
+   }
+ 
+   result.value = merged.data;
++  result.omitted = left.omitted || right.omitted;
+   return result;
+ }
+ 
+@@ -2713,7 +2723,7 @@ export const $ZodTuple: core.$constructor<$ZodTuple> = /*@__PURE__*/ core.$const
+     // array. The post-processing in `handleTupleResults` walks them in
+     // order so it can decide whether an absent optional-output error can
+     // truncate the tail or must be reported to preserve required output.
+-    const itemResults: ParsePayload[] = new Array(items.length);
++    const itemResults: ParsePayload[] = new Array(def.rest ? Math.max(items.length, input.length) : items.length);
+     for (let i = 0; i < items.length; i++) {
+       const r = items[i]._zod.run({ value: input[i], issues: [] }, ctx);
+       if (r instanceof Promise) {
+@@ -2734,9 +2744,14 @@ export const $ZodTuple: core.$constructor<$ZodTuple> = /*@__PURE__*/ core.$const
+         i++;
+         const result = def.rest._zod.run({ value: el, issues: [] }, ctx);
+         if (result instanceof Promise) {
+-          proms.push(result.then((r) => handleTupleResult(r, payload, i)));
++          const index = i;
++          proms.push(
++            result.then((r) => {
++              itemResults[index] = r;
++            })
++          );
+         } else {
+-          handleTupleResult(result, payload, i);
++          itemResults[i] = result;
+         }
+       }
+     }
+@@ -2759,7 +2774,7 @@ function handleTupleResult(result: ParsePayload, final: ParsePayload<any[]>, ind
+   if (result.issues.length) {
+     final.issues.push(...util.prefixIssues(index, result.issues));
+   }
+-  final.value[index] = result.value;
++  if (!result.omitted) final.value.push(result.value);
+ }
+ 
+ function handleTupleResults(
+@@ -2769,6 +2784,7 @@ function handleTupleResults(
+   input: unknown[],
+   optoutStart: number
+ ) {
++  let omitted = false;
+   // Walk results in order. Mirror $ZodObject's swallow-on-absent-optional
+   // rule, but only after `optoutStart`: the first index where the output
+   // tuple tail can be absent.
+@@ -2782,7 +2798,14 @@ function handleTupleResults(
+       }
+       final.issues.push(...util.prefixIssues(i, r.issues));
+     }
+-    final.value[i] = r.value;
++    if (r.omitted) omitted = true;
++    else final.value.push(r.value);
++  }
++
++  for (let i = items.length; i < itemResults.length; i++) {
++    const r = itemResults[i]!;
++    if (r.omitted) omitted = true;
++    else handleTupleResult(r, final, i);
+   }
+ 
+   // Drop trailing slots that produced `undefined` for absent input
+@@ -2791,7 +2814,7 @@ function handleTupleResults(
+   // *inside* the input must be preserved even when the schema is
+   // optional-out (e.g. `z.string().or(z.undefined())` accepting an
+   // explicit undefined value).
+-  for (let i = final.value.length - 1; i >= input.length; i--) {
++  for (let i = final.value.length - 1; !omitted && i >= input.length; i--) {
+     if (items[i]._zod.optout === "optional" && final.value[i] === undefined) {
+       final.value.length = i;
+     } else {
+@@ -2922,14 +2945,14 @@ export const $ZodRecord: core.$constructor<$ZodRecord> = /*@__PURE__*/ core.$con
+                 if (result.issues.length) {
+                   payload.issues.push(...util.prefixIssues(key, result.issues));
+                 }
+-                payload.value[outKey] = result.value;
++                if (!result.omitted) payload.value[outKey] = result.value;
+               })
+             );
+           } else {
+             if (result.issues.length) {
+               payload.issues.push(...util.prefixIssues(key, result.issues));
+             }
+-            payload.value[outKey] = result.value;
++            if (!result.omitted) payload.value[outKey] = result.value;
+           }
+         }
+       }
+@@ -3000,14 +3023,14 @@ export const $ZodRecord: core.$constructor<$ZodRecord> = /*@__PURE__*/ core.$con
+               if (result.issues.length) {
+                 payload.issues.push(...util.prefixIssues(key, result.issues));
+               }
+-              payload.value[keyResult.value as PropertyKey] = result.value;
++              if (!result.omitted) payload.value[keyResult.value as PropertyKey] = result.value;
+             })
+           );
+         } else {
+           if (result.issues.length) {
+             payload.issues.push(...util.prefixIssues(key, result.issues));
+           }
+-          payload.value[keyResult.value as PropertyKey] = result.value;
++          if (!result.omitted) payload.value[keyResult.value as PropertyKey] = result.value;
+         }
+       }
+     }
+@@ -3121,7 +3144,7 @@ function handleMapResult(
+       });
+     }
+   }
+-  final.value.set(keyResult.value, valueResult.value);
++  if (!keyResult.omitted && !valueResult.omitted) final.value.set(keyResult.value, valueResult.value);
+ }
+ 
+ ///////////////////////////////////////
+@@ -3181,7 +3204,7 @@ function handleSetResult(result: ParsePayload, final: ParsePayload<Set<any>>) {
+   if (result.issues.length) {
+     final.issues.push(...result.issues);
+   }
+-  final.value.add(result.value);
++  if (!result.omitted) final.value.add(result.value);
+ }
+ 
+ ////////////////////////////////////////
+@@ -3614,8 +3637,16 @@ export interface $ZodDefaultDef<T extends SomeType = $ZodType> extends $ZodTypeD
+   innerType: T;
+   /** The default value. May be a getter. */
+   defaultValue: util.NoUndefined<core.output<T>>;
++  skipEncoding?: $ZodDefaultSkipEncoding | undefined;
++  defaultValueFactory?: boolean | undefined;
++  rawDefaultValue?: unknown;
+ }
+ 
++export type $ZodDefaultSkipEncoding =
++  | boolean
++  | { mode: "shallow" | "deep" | "strict" }
++  | ((encodedValue: unknown, rawDefaultValue: unknown) => boolean | Promise<boolean>);
++
+ export interface $ZodDefaultInternals<T extends SomeType = $ZodType>
+   extends $ZodTypeInternals<util.NoUndefined<core.output<T>>, core.input<T> | undefined> {
+   def: $ZodDefaultDef<T>;
+@@ -3640,7 +3671,12 @@ export const $ZodDefault: core.$constructor<$ZodDefault> = /*@__PURE__*/ core.$c
+ 
+     inst._zod.parse = (payload, ctx) => {
+       if (ctx.direction === "backward") {
+-        return def.innerType._zod.run(payload, ctx);
++        const encoded = def.innerType._zod.run(payload, ctx);
++        if (def.skipEncoding === undefined || def.skipEncoding === false) return encoded;
++        if (encoded instanceof Promise) {
++          return encoded.then((encoded) => handleDefaultEncodeResult(encoded, def, ctx));
++        }
++        return handleDefaultEncodeResult(encoded, def, ctx);
+       }
+ 
+       // Forward direction (decode): apply defaults for undefined input
+@@ -3661,6 +3697,40 @@ export const $ZodDefault: core.$constructor<$ZodDefault> = /*@__PURE__*/ core.$c
+   }
+ );
+ 
++function handleDefaultEncodeResult(payload: ParsePayload, def: $ZodDefaultDef, ctx: ParseContextInternal) {
++  if (payload.issues.length) return payload;
++
++  const finish = (encodedDefault: ParsePayload) => {
++    if (encodedDefault.issues.length) return payload;
++    const option = def.skipEncoding!;
++    let matches: boolean | Promise<boolean>;
++    if (typeof option === "function") {
++      matches = option(payload.value, def.rawDefaultValue);
++    } else {
++      const mode = option === true ? "deep" : option === false ? "strict" : option.mode;
++      matches =
++        mode === "strict"
++          ? Object.is(payload.value, encodedDefault.value)
++          : mode === "shallow"
++            ? util.shallowEqual(payload.value, encodedDefault.value)
++            : util.deepEqual(payload.value, encodedDefault.value);
++    }
++    if (matches instanceof Promise) {
++      if (ctx.async === false) throw new Error("Cannot use async skipEncoding in synchronous encode");
++      return matches.then((matches) => {
++        if (matches) payload.omitted = true;
++        return payload;
++      });
++    }
++    if (matches) payload.omitted = true;
++    return payload;
++  };
++
++  if (typeof def.skipEncoding === "function") return finish({ value: undefined, issues: [] });
++  const encodedDefault = def.innerType._zod.run({ value: def.defaultValue, issues: [] }, ctx);
++  return encodedDefault instanceof Promise ? encodedDefault.then(finish) : finish(encodedDefault);
++}
++
+ function handleDefaultResult(payload: ParsePayload, def: $ZodDefaultDef) {
+   if (payload.value === undefined) {
+     payload.value = def.defaultValue;
+diff --git a/packages/zod/src/v4/core/util.ts b/packages/zod/src/v4/core/util.ts
+index 8738df4..79c4b32 100644
+--- a/packages/zod/src/v4/core/util.ts
++++ b/packages/zod/src/v4/core/util.ts
+@@ -411,6 +411,92 @@ export function shallowClone(o: any): any {
+   return o;
+ }
+ 
++function enumerableKeys(value: object): PropertyKey[] {
++  return Reflect.ownKeys(value).filter((key) => Object.prototype.propertyIsEnumerable.call(value, key));
++}
++
++export function shallowEqual(a: unknown, b: unknown): boolean {
++  if (Object.is(a, b)) return true;
++  if (Array.isArray(a) && Array.isArray(b)) {
++    if (a.length !== b.length) return false;
++    for (let index = 0; index < a.length; index++) if (!Object.is(a[index], b[index])) return false;
++    return true;
++  }
++  if (isPlainObject(a) && isPlainObject(b)) {
++    const aKeys = enumerableKeys(a);
++    const bKeys = enumerableKeys(b);
++    return (
++      aKeys.length === bKeys.length &&
++      aKeys.every((key) => Object.prototype.propertyIsEnumerable.call(b, key) && Object.is(a[key], b[key]))
++    );
++  }
++  if (a instanceof Map && b instanceof Map) {
++    if (a.size !== b.size) return false;
++    const unmatched = [...b];
++    for (const [aKey, aValue] of a) {
++      const index = unmatched.findIndex(([bKey, bValue]) => Object.is(aKey, bKey) && Object.is(aValue, bValue));
++      if (index === -1) return false;
++      unmatched.splice(index, 1);
++    }
++    return true;
++  }
++  if (a instanceof Set && b instanceof Set) {
++    return a.size === b.size && [...a].every((value) => [...b].some((other) => Object.is(value, other)));
++  }
++  return false;
++}
++
++export function deepEqual(a: unknown, b: unknown, seen = new Map<object, Set<object>>()): boolean {
++  if (Object.is(a, b)) return true;
++  if (typeof a !== "object" || a === null || typeof b !== "object" || b === null) return false;
++
++  const matches = seen.get(a);
++  if (matches?.has(b)) return true;
++  if (matches) matches.add(b);
++  else seen.set(a, new Set([b]));
++
++  if (Array.isArray(a) && Array.isArray(b)) {
++    if (a.length !== b.length) return false;
++    for (let index = 0; index < a.length; index++) {
++      if (!deepEqual(a[index], b[index], seen)) return false;
++    }
++    return true;
++  }
++  if (isPlainObject(a) && isPlainObject(b)) {
++    const aKeys = enumerableKeys(a);
++    const bKeys = enumerableKeys(b);
++    if (aKeys.length !== bKeys.length) return false;
++    return aKeys.every((key) => Object.prototype.propertyIsEnumerable.call(b, key) && deepEqual(a[key], b[key], seen));
++  }
++  if (a instanceof Map && b instanceof Map) {
++    if (a.size !== b.size) return false;
++    const unmatched = [...b];
++    for (const [aKey, aValue] of a) {
++      const index = unmatched.findIndex(([bKey, bValue]) => {
++        const candidateSeen = new Map([...seen].map(([key, values]) => [key, new Set(values)]));
++        return deepEqual(aKey, bKey, candidateSeen) && deepEqual(aValue, bValue, candidateSeen);
++      });
++      if (index === -1) return false;
++      unmatched.splice(index, 1);
++    }
++    return true;
++  }
++  if (a instanceof Set && b instanceof Set) {
++    if (a.size !== b.size) return false;
++    const unmatched = [...b];
++    for (const value of a) {
++      const index = unmatched.findIndex((other) => {
++        const candidateSeen = new Map([...seen].map(([key, values]) => [key, new Set(values)]));
++        return deepEqual(value, other, candidateSeen);
++      });
++      if (index === -1) return false;
++      unmatched.splice(index, 1);
++    }
++    return true;
++  }
++  return false;
++}
++
+ export function numKeys(data: any): number {
+   let keyCount = 0;
+   for (const key in data) {
+diff --git a/packages/zod/src/v4/mini/schemas.ts b/packages/zod/src/v4/mini/schemas.ts
+index 38978a0..1bc53aa 100644
+--- a/packages/zod/src/v4/mini/schemas.ts
++++ b/packages/zod/src/v4/mini/schemas.ts
+@@ -1474,13 +1474,21 @@ export const ZodMiniDefault: core.$constructor<ZodMiniDefault> = /*@__PURE__*/ c
+ // @__NO_SIDE_EFFECTS__
+ export function _default<T extends SomeType>(
+   innerType: T,
+-  defaultValue: util.NoUndefined<core.output<T>> | (() => util.NoUndefined<core.output<T>>)
++  defaultValue: util.NoUndefined<core.output<T>> | (() => util.NoUndefined<core.output<T>>),
++  params?: core.$ZodDefaultParams
+ ): ZodMiniDefault<T> {
++  const isFactory = typeof defaultValue === "function";
++  if (isFactory && params?.skipEncoding !== undefined && typeof params.skipEncoding !== "function") {
++    throw new Error(`Cannot use skipEncoding: ${JSON.stringify(params.skipEncoding)} with a factory default`);
++  }
+   return new ZodMiniDefault({
+     type: "default",
+     innerType: innerType as any as core.$ZodType,
++    ...params,
++    defaultValueFactory: isFactory,
++    rawDefaultValue: isFactory ? undefined : defaultValue,
+     get defaultValue() {
+-      return typeof defaultValue === "function" ? (defaultValue as Function)() : util.shallowClone(defaultValue);
++      return isFactory ? (defaultValue as Function)() : util.shallowClone(defaultValue);
+     },
+   }) as any;
+ }
